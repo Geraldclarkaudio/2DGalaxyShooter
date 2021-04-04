@@ -16,30 +16,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateMovement();
+    }
+
+    void CalculateMovement()
+    {
+        //local variables
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
-       // transform.Translate(Vector3.right * horizontalInput  * _speed * Time.deltaTime);
-        //transform.Translate(Vector3.up * verticalInput * _speed * Time.deltaTime);
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
+        //Input moves with this
         transform.Translate(direction * _speed * Time.deltaTime);
 
-        //if player position on y is greagter than 0, set y position to 0. 
-        if(transform.position.y >= 0)
-        {
-            //uses current position on x axis so it doesnt snap to the middle
-            transform.position = new Vector3(transform.position.x,0,0);
-        }
-        else if(transform.position.y <= -3.8f)
-        {
-            transform.position = new Vector3(transform.position.x, -3.8f, 0);
-        }
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
-        if(transform.position.x >= 11.2f)
+        if (transform.position.x >= 11.2f)
         {
             transform.position = new Vector3(-9.4f, transform.position.y, 0);
         }
-        else if(transform.position.x <= -11.2f)
+        else if (transform.position.x <= -11.2f)
         {
             transform.position = new Vector3(9.4f, transform.position.y, 0);
         }
