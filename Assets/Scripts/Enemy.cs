@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        transform.position = new Vector3(0, 7, 0);
     }
 
     // Update is called once per frame
@@ -22,5 +22,28 @@ public class Enemy : MonoBehaviour
             float randomX = Random.Range(-9.8f, 9.8f);
             transform.position = new Vector3(randomX, 7.5f, 0);
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            //damage player and null check
+
+            Player player = other.transform.GetComponent<Player>();
+            
+            if(player != null)
+            {
+                player.Damage();
+            }
+            
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "Laser")
+        { 
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+            
     }
 }

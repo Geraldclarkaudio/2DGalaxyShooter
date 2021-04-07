@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 245507219}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245507214}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -231,6 +231,7 @@ MonoBehaviour:
   laserPrefab: {fileID: 8230306141177599504, guid: 182c1ab32a020f7439c67f3df7a82c1d,
     type: 3}
   _fireRate: 0.15
+  _lives: 3
 --- !u!1 &1291519220
 GameObject:
   m_ObjectHideFlags: 0
