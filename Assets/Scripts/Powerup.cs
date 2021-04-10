@@ -9,7 +9,7 @@ public class Powerup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -27,10 +27,13 @@ public class Powerup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            Player player = other.transform.GetComponent<Player>();
+            if (player != null)
+            {
+                player.TripleShotActive();
+            }
+            
             Destroy(this.gameObject);
         }
     }
-
-    //ontriggerenter2d()
-    //if other.tag is player //destroy this gameobject 
 }
