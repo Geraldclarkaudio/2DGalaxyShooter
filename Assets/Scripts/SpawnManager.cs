@@ -13,6 +13,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject tripleShotPowerUpPrefab;
 
+    [SerializeField]
+    private GameObject speedBoostPowerUpPrefab;
+
     private bool stopSpawning = false;
     // Start is called before the first frame update
     void Start()
