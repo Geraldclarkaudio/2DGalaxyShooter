@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
+    private float _speedMultiplier = 2f;
 
     [SerializeField]
     private GameObject laserPrefab;
@@ -23,6 +25,9 @@ public class Player : MonoBehaviour
     private bool isTripleShotActive = false;
     [SerializeField]
     private GameObject tripleShotPrefab;
+
+    [SerializeField]
+    private bool isSpeedBoostActive = false;
 
 
     // Start is called before the first frame update
@@ -42,11 +47,11 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
 
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
             FireLaser();
         }
-   
+
     }
 
     void CalculateMovement()
@@ -58,6 +63,7 @@ public class Player : MonoBehaviour
 
         //Input moves with this
         transform.Translate(direction * _speed * Time.deltaTime);
+       
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
@@ -73,9 +79,9 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
- 
-       _canFire = Time.time + _fireRate;
-      // Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity); 
+
+        _canFire = Time.time + _fireRate;
+        // Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity); 
 
         if (isTripleShotActive == true)
         {
@@ -93,7 +99,7 @@ public class Player : MonoBehaviour
 
         //check if dead//if so destroy 
 
-        if(_lives < 1)
+        if (_lives < 1)
         {
             spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
@@ -107,10 +113,33 @@ public class Player : MonoBehaviour
     }
     IEnumerator TripleShotPowerDownRoutine()
     {
-        while(isTripleShotActive == true)
+        while (isTripleShotActive == true)
         {
             yield return new WaitForSeconds(5);
             isTripleShotActive = false;
         }
     }
+
+    public void SpeedBoostActive()
+    {
+        isSpeedBoostActive = true;
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
+    }
+
+    IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        while (isSpeedBoostActive == true)
+        {
+            yield return new WaitForSeconds(5);
+            isSpeedBoostActive = false;
+            _speed /= _speedMultiplier;
+        }
+    }
+
+    public void ShieldActive()
+    {
+        //Shield Collected
+    }
+
 }
