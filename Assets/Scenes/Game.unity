@@ -155,6 +155,7 @@ MonoBehaviour:
   _enemyContainer: {fileID: 1619170653}
   tripleShotPowerUpPrefab: {fileID: 8040909580450887359, guid: e9b8afc33b3d24a439e583fabed55ad9,
     type: 3}
+  speedBoostPowerUpPrefab: {fileID: 0}
 --- !u!4 &357008996
 Transform:
   m_ObjectHideFlags: 0
@@ -284,7 +285,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0000011920929, y: -0.06894827}
   m_SpriteTilingProperty:
