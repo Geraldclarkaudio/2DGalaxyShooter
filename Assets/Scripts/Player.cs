@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private bool isSpeedBoostActive = false;
+    [SerializeField]
+    private bool isShieldActive = false;
+
+    [SerializeField]
+    private GameObject playerShieldPrefab;
 
 
     // Start is called before the first frame update
@@ -95,7 +100,17 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        _lives--;
+        if(isShieldActive == true)
+        {
+            isShieldActive = false;
+            playerShieldPrefab.SetActive(false);
+            return;
+        }
+        else
+        {
+            _lives--;
+        }
+       
 
         //check if dead//if so destroy 
 
@@ -139,7 +154,17 @@ public class Player : MonoBehaviour
 
     public void ShieldActive()
     {
-        //Shield Collected
+        isShieldActive = true;
+        playerShieldPrefab.SetActive(true);
+        //StartCoroutine(ShieldPowerDownRoutine());
     }
 
+   // IEnumerator ShieldPowerDownRoutine()
+    //{
+        //while(isShieldActive == true)
+      //  {
+          //  yield return new WaitForSeconds(30);
+            //isShieldActive = false;
+        //}
+    //}
 }

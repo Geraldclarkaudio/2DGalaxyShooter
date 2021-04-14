@@ -51,13 +51,8 @@ public class Powerup : MonoBehaviour
                         break;
 
                 }
-            }
-            //else if powerup id 1
-            //speed power up
-            //if powerup id is 2 
-            //shields 
+            } 
 
-            
             Destroy(this.gameObject);
         }
     }
