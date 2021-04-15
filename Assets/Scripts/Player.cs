@@ -156,15 +156,5 @@ public class Player : MonoBehaviour
     {
         isShieldActive = true;
         playerShieldPrefab.SetActive(true);
-        //StartCoroutine(ShieldPowerDownRoutine());
     }
-
-   // IEnumerator ShieldPowerDownRoutine()
-    //{
-        //while(isShieldActive == true)
-      //  {
-          //  yield return new WaitForSeconds(30);
-            //isShieldActive = false;
-        //}
-    //}
 }
