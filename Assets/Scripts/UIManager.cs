@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     private Text _scoreText;
 
     [SerializeField]
+    private Text _gameOverText;
+
+    [SerializeField]
     private Image _livesImg;
 
     [SerializeField]
@@ -18,6 +21,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         _scoreText.text = "Score: " + 0;
+        _gameOverText.gameObject.SetActive(false);
         //assign text component to handle 
 
     }
@@ -38,5 +42,10 @@ public class UIManager : MonoBehaviour
         //display img sprite
         //give new oner based on current lives
         _livesImg.sprite = _livesSprites[currentlives];
+
+        if(currentlives == 0)
+        {
+            _gameOverText.gameObject.SetActive(true);
+        }
     }
 }
