@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private Animator _anim;
+
     [SerializeField]
     private float _enemySpeed = 4;
 
@@ -12,6 +14,18 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        
+        if(_player == null)
+        {
+            Debug.LogError("Player is Null");
+        }
+
+        _anim = GetComponent<Animator>();
+
+        if(_anim == null)
+        {
+            Debug.LogError("Animator is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -37,7 +51,9 @@ public class Enemy : MonoBehaviour
                  player.Damage();
              }
 
-             Destroy(this.gameObject);
+            _anim.SetTrigger("OnEnemyDeath");
+            _enemySpeed = 0;
+             Destroy(this.gameObject, 2.5f);
          }
 
          if (other.tag == "Laser")
@@ -48,8 +64,9 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddToScore(10);
             }
-
-             Destroy(this.gameObject);
+            _anim.SetTrigger("OnEnemyDeath");
+            _enemySpeed = 0;
+            Destroy(this.gameObject, 2.5f);
          }   
     }
 }
