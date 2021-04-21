@@ -16,7 +16,8 @@ public class SpawnManager : MonoBehaviour
 
     private bool stopSpawning = false;
     // Start is called before the first frame update
-    void Start()
+
+    public void StartSpawning()
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerUpRoutine());
@@ -30,6 +31,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemyRoutine()
     {
+        yield return new WaitForSeconds(3.0f);
         //while loop 
         while (stopSpawning == false)
         {
@@ -42,7 +44,9 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerUpRoutine()
     {
-        while(stopSpawning == false)
+        yield return new WaitForSeconds(3.0f);
+
+        while (stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
             int randomPowerUp = Random.Range(0, 3);
