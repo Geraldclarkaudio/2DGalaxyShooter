@@ -45,6 +45,9 @@ public class Player : MonoBehaviour
 
     private UIManager _uiManager;
 
+    [SerializeField]
+    private GameObject explosionAnimationPrefab;
+
     //variable to store audio clip 
     [SerializeField]
     private AudioClip _laserFireSound;
@@ -162,6 +165,7 @@ public class Player : MonoBehaviour
         if (_lives < 1)
         {
             spawnManager.OnPlayerDeath();
+            Instantiate(explosionAnimationPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

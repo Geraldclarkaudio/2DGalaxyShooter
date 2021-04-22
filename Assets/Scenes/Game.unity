@@ -845,6 +845,8 @@ MonoBehaviour:
   _score: 0
   rightEngineSprite: {fileID: 1592107364}
   leftEngineSprite: {fileID: 1575733170}
+  explosionAnimationPrefab: {fileID: 9156114463352819223, guid: ac81e2423f32fa34197d5d57bceb76e4,
+    type: 3}
   _laserFireSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
 --- !u!212 &874856621
 SpriteRenderer:
