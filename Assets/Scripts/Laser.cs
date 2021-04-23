@@ -7,6 +7,8 @@ public class Laser : MonoBehaviour
     [SerializeField]
     private float laserSpeed = 8.0f;
 
+    private bool _isEnemyLaser = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,15 +18,65 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.up * laserSpeed * Time.deltaTime);
-        
-        if(transform.position.y >= 8.0f)
+        if(_isEnemyLaser == false)
         {
-            if(transform.parent != null)
+            MoveUp();
+        }
+
+        else
+        {
+            MoveDown();
+        }
+       
+    }
+    void MoveUp()
+    {
+        if (_isEnemyLaser == false)
+        {
+            transform.Translate(Vector3.up * laserSpeed * Time.deltaTime);
+
+            if (transform.position.y >= 8.0f)
             {
-                Destroy(transform.parent.gameObject);
+                if (transform.parent != null)
+                {
+                    Destroy(transform.parent.gameObject);
+                }
+                Destroy(this.gameObject);
             }
-            Destroy(this.gameObject);
+        }
+    }
+    void MoveDown()
+    {
+        if (_isEnemyLaser == true)
+        {
+            transform.Translate(Vector3.down * laserSpeed * Time.deltaTime);
+
+            if(transform.position.y <= -6.0f)
+            {
+                if(transform.parent != null)
+                {
+                    Destroy(transform.parent.gameObject);
+                }
+
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    public void AssignEnemyLaser()
+    {
+        _isEnemyLaser = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Player" && _isEnemyLaser == true)
+        {
+            Player player = other.GetComponent<Player>();
+            if(player != null)
+            {
+                player.Damage();
+            }
         }
     }
 }
