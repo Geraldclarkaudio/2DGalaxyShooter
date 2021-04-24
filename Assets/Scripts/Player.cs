@@ -5,9 +5,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.5f;
+    private float _speed = 5f;
     [SerializeField]
-    private float _speedMultiplier = 2f;
+    private float _speedMultiplier = 4f;
+
+    //Thrusters
+    [SerializeField]
+    private float _thrusterSpeed = 7.0f;
+
+    [SerializeField]
+    private GameObject Thrusta;
 
     [SerializeField]
     private GameObject laserPrefab;
@@ -52,6 +59,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _laserFireSound;
 
+    [SerializeField]
+    private AudioClip _playerDamageSound;
+
     private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
@@ -74,10 +84,6 @@ public class Player : MonoBehaviour
         if(_audioSource == null)
         {
             Debug.LogError("AudioSource on the player is Null!");
-        }
-        else
-        {
-            _audioSource.clip = _laserFireSound;
         }
     }
 
@@ -102,6 +108,18 @@ public class Player : MonoBehaviour
 
         //Input moves with this
         transform.Translate(direction * _speed * Time.deltaTime);
+        
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+                _speed = _thrusterSpeed;
+                Thrusta.SetActive(true);
+            }
+            else
+            {
+                _speed = 5f;
+                Thrusta.SetActive(false);
+            }
+        
        
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
@@ -124,10 +142,12 @@ public class Player : MonoBehaviour
 
         if (isTripleShotActive == true)
         {
+            _audioSource.clip = _laserFireSound;
             Instantiate(tripleShotPrefab, transform.position, Quaternion.identity);
         }
         else
         {
+            _audioSource.clip = _laserFireSound;
             Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
         }
 
@@ -150,10 +170,14 @@ public class Player : MonoBehaviour
             if(_lives == 2)
             {
                 rightEngineSprite.SetActive(true);
+                _audioSource.PlayOneShot(_playerDamageSound, 1);
+           
             }
             else if(_lives == 1)
             {
                 leftEngineSprite.SetActive(true);
+                _audioSource.PlayOneShot(_playerDamageSound, 1);
+
             }
 
             _uiManager.UpdateLives(_lives);

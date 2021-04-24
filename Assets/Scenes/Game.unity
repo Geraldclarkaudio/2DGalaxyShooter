@@ -666,12 +666,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &757938267 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2789585873906513465, guid: 5445203d8cda5414c9987c4c6c4e435d,
-    type: 3}
-  m_PrefabInstance: {fileID: 367511953}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &757938268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1649301961106208988, guid: 5445203d8cda5414c9987c4c6c4e435d,
@@ -851,7 +845,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _speedMultiplier: 2
+  _speedMultiplier: 4
+  _thrusterSpeed: 10
+  Thrusta: {fileID: 2039123300}
   laserPrefab: {fileID: 7902722867122585680, guid: a0871679a6108c142ada9370103f0620,
     type: 3}
   _fireRate: 0.15
@@ -861,13 +857,15 @@ MonoBehaviour:
     type: 3}
   isSpeedBoostActive: 0
   isShieldActive: 0
-  playerShieldPrefab: {fileID: 757938267}
+  playerShieldPrefab: {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48,
+    type: 3}
   _score: 0
   rightEngineSprite: {fileID: 1592107364}
   leftEngineSprite: {fileID: 1575733170}
   explosionAnimationPrefab: {fileID: 9156114463352819223, guid: ac81e2423f32fa34197d5d57bceb76e4,
     type: 3}
   _laserFireSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _playerDamageSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!212 &874856621
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1928,7 +1926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2039123301
 Transform:
   m_ObjectHideFlags: 0

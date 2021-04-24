@@ -61,6 +61,7 @@ public class Laser : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
     }
 
     public void AssignEnemyLaser()
@@ -76,6 +77,7 @@ public class Laser : MonoBehaviour
             if(player != null)
             {
                 player.Damage();
+                
             }
         }
     }
