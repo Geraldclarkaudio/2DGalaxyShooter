@@ -57,6 +57,9 @@ public class Powerup : MonoBehaviour
                     case 3:
                         player.AmmoPowerUp();
                         break;
+                    case 4:
+                        player.HealthUp();
+                            break;
 
                 }
             } 

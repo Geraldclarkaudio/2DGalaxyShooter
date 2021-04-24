@@ -222,6 +222,8 @@ public class Player : MonoBehaviour
 
             }
 
+            
+
             _uiManager.UpdateLives(_lives);
         }
        
@@ -293,4 +295,18 @@ public class Player : MonoBehaviour
         _uiManager.UpdateAmmo(_ammo);
     }
    
+    public void HealthUp()
+    {
+        _lives++;
+        _uiManager.UpdateLives(_lives);
+
+        if(_lives == 3)
+        {
+            rightEngineSprite.SetActive(false);
+        }
+        if(_lives == 2)
+        {
+            leftEngineSprite.SetActive(false);
+        }
+    }
 }
