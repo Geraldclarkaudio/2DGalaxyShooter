@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
+    [SerializeField]
+    private int shieldLife = 3;
+
     private SpawnManager spawnManager;
 
     [SerializeField]
@@ -40,6 +43,11 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject playerShieldPrefab;
+    [SerializeField]
+    private GameObject playerShieldPrefab2;
+    [SerializeField]
+    private GameObject playerShieldPrefab3;
+
 
     [SerializeField]
     private int _score;
@@ -70,6 +78,7 @@ public class Player : MonoBehaviour
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        
 
         if (spawnManager == null)
         {
@@ -159,10 +168,27 @@ public class Player : MonoBehaviour
     {
         if(isShieldActive == true)
         {
-            isShieldActive = false;
-            playerShieldPrefab.SetActive(false);
-            return;
+            shieldLife--;
+
+            if (shieldLife == 2)
+            {
+                playerShieldPrefab.SetActive(false);
+                playerShieldPrefab2.SetActive(true);
+                isShieldActive = true;
+            }
+            else if (shieldLife == 1)
+            {
+                playerShieldPrefab2.SetActive(false);
+                playerShieldPrefab3.SetActive(true);
+                isShieldActive = true;
+            }
+            else if (shieldLife < 1)
+            {
+                playerShieldPrefab3.SetActive(false);
+                isShieldActive = false;
+            }
         }
+
         else
         {
             _lives--;
@@ -228,8 +254,10 @@ public class Player : MonoBehaviour
     public void ShieldActive()
     {
         isShieldActive = true;
+        shieldLife = 3; 
         playerShieldPrefab.SetActive(true);
     }
+
 
     public void AddToScore(int points)
     {

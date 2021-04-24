@@ -40,6 +40,7 @@ public class Powerup : MonoBehaviour
             Player player = other.transform.GetComponent<Player>();
 
             AudioSource.PlayClipAtPoint(_powerupClip, transform.position);
+
             if (player != null)
             {
                 switch(powerupID)
