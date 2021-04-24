@@ -282,5 +282,11 @@ public class Player : MonoBehaviour
         _ammo--;
         _uiManager.UpdateAmmo(_ammo);
     }
+
+    public void AmmoPowerUp()
+    {
+        _ammo = 15;
+        _uiManager.UpdateAmmo(_ammo);
+    }
    
 }
