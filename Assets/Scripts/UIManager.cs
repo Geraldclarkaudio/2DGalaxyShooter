@@ -23,10 +23,14 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameManager _gameManager;
 
+    [SerializeField]
+    private Text _ammoText;
+
     //handle to text
     // Start is called before the first frame update
     void Start()
     {
+        _ammoText.text = "Ammo: " + 15;
         _scoreText.text = "Score: " + 0;
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
@@ -49,6 +53,16 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore;
+    }
+
+    public void UpdateAmmo(int ammoAmount)
+    {
+        _ammoText.text = "Ammo: " + ammoAmount;
+
+        if(ammoAmount < 1)
+        {
+            _ammoText.text = "Ammo: " + 0;
+        }
     }
 
    public void UpdateLives(int currentlives)

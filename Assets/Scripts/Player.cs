@@ -53,6 +53,11 @@ public class Player : MonoBehaviour
     private int _score;
 
     [SerializeField]
+    private int _ammo;
+
+ 
+
+    [SerializeField]
     private GameObject rightEngineSprite;
 
     [SerializeField]
@@ -74,6 +79,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _ammo = 15;
         transform.position = new Vector3(0, 0, 0);
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
@@ -101,9 +107,13 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _ammo > 0)
         {
             FireLaser();
+        }
+        else
+        {
+            return;
         }
 
     }
@@ -158,6 +168,8 @@ public class Player : MonoBehaviour
         {
             _audioSource.clip = _laserFireSound;
             Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+            MinusAmmo(1);
+           
         }
 
         //play laser audio clip 
@@ -264,4 +276,11 @@ public class Player : MonoBehaviour
         _score += points;
         _uiManager.UpdateScore(_score);
     }
+
+    public void MinusAmmo(int ammo)
+    {
+        _ammo--;
+        _uiManager.UpdateAmmo(_ammo);
+    }
+   
 }
