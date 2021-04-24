@@ -75,6 +75,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _playerDamageSound;
 
+    [SerializeField]
+    private AudioClip _noAmmoSound;
+
     private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
@@ -111,8 +114,9 @@ public class Player : MonoBehaviour
         {
             FireLaser();
         }
-        else
+        else if(Input.GetKeyDown(KeyCode.Space) && _ammo < 1)
         {
+            _audioSource.PlayOneShot(_noAmmoSound, 0.5f);
             return;
         }
 

@@ -888,6 +888,7 @@ MonoBehaviour:
     type: 3}
   _laserFireSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _playerDamageSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _noAmmoSound: {fileID: 8300000, guid: 2a9c033f8d77ca94891dfbfa7f92b51e, type: 3}
 --- !u!212 &874856621
 SpriteRenderer:
   m_ObjectHideFlags: 0
