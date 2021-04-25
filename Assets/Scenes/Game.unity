@@ -334,6 +334,7 @@ MonoBehaviour:
   - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
   - {fileID: 686641914915422231, guid: b31078958b6288e4890b66621a5e2427, type: 3}
   - {fileID: 8073997846462604206, guid: a7ca6acbbb9efca45a2ac2f1cab0cce8, type: 3}
+  - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
 --- !u!4 &357008996
 Transform:
   m_ObjectHideFlags: 0
@@ -881,6 +882,9 @@ MonoBehaviour:
   playerShieldPrefab: {fileID: 757938267}
   playerShieldPrefab2: {fileID: 1591247184}
   playerShieldPrefab3: {fileID: 535182283}
+  heatSeekPowerUp: {fileID: 2286868166715237769, guid: af2487f4cfa9f194e954ee1e7772bf64,
+    type: 3}
+  isHeatSeekActive: 0
   _score: 0
   _ammo: 0
   rightEngineSprite: {fileID: 1592107364}
@@ -948,7 +952,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874856619}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.44, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 757938268}
@@ -1379,7 +1383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325191320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.033, y: 0.768, z: 0}
+  m_LocalPosition: {x: 0.033, y: 1, z: 0}
   m_LocalScale: {x: 1.0799594, y: 1.1421497, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

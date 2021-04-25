@@ -48,6 +48,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject playerShieldPrefab3;
 
+    [SerializeField]
+    private GameObject heatSeekPowerUp;
+
+    [SerializeField]
+    private bool isHeatSeekActive = false;
+
 
     [SerializeField]
     private int _score;
@@ -116,7 +122,7 @@ public class Player : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.Space) && _ammo < 1)
         {
-            _audioSource.PlayOneShot(_noAmmoSound, 0.5f);
+            _audioSource.PlayOneShot(_noAmmoSound, 0.2f);
             return;
         }
 
@@ -167,6 +173,10 @@ public class Player : MonoBehaviour
         {
             _audioSource.clip = _laserFireSound;
             Instantiate(tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else if(isHeatSeekActive == true)
+        {
+            Instantiate(heatSeekPowerUp, transform.position, Quaternion.identity);
         }
         else
         {
@@ -308,5 +318,21 @@ public class Player : MonoBehaviour
         {
             leftEngineSprite.SetActive(false);
         }
+    }
+
+    public void HeatSeek()
+    {
+        isHeatSeekActive = true;
+        StartCoroutine(HeatSeekActiveRoutine());
+    }
+
+    IEnumerator HeatSeekActiveRoutine()
+    {
+        while (isHeatSeekActive == true)
+        {
+            yield return new WaitForSeconds(10);
+            isHeatSeekActive = false;
+        }
+           
     }
 }
