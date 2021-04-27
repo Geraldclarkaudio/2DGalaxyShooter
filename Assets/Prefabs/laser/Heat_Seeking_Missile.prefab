@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7577776654802272196}
   - component: {fileID: 8919659329583007163}
-  - component: {fileID: -7345326938527410283}
   - component: {fileID: 7027093894693211017}
   - component: {fileID: -1510747523552759159}
+  - component: {fileID: 891809049611013023}
   m_Layer: 0
   m_Name: Heat_Seeking_Missile
-  m_TagString: Laser
+  m_TagString: HeatSeeker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,19 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7345326938527410283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2286868166715237769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5d18f7252ec942419910c29f6c965cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserSpeed: 8
 --- !u!61 &7027093894693211017
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,3 +131,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &891809049611013023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286868166715237769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacfcfa98ca89a84b9dc7e640114a0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8

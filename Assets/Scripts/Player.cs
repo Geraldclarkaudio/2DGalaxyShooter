@@ -54,6 +54,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool isHeatSeekActive = false;
 
+    public float missileSpeed = 10f;
+
+   
+
 
     [SerializeField]
     private int _score;
@@ -61,7 +65,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _ammo;
 
- 
+  
 
     [SerializeField]
     private GameObject rightEngineSprite;
@@ -93,6 +97,8 @@ public class Player : MonoBehaviour
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        
+        
         
 
         if (spawnManager == null)
@@ -177,6 +183,7 @@ public class Player : MonoBehaviour
         else if(isHeatSeekActive == true)
         {
             Instantiate(heatSeekPowerUp, transform.position, Quaternion.identity);
+            
         }
         else
         {

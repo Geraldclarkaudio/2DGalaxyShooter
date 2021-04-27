@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Laser
   - Enemy
+  - HeatSeeker
   layers:
   - Default
   - TransparentFX

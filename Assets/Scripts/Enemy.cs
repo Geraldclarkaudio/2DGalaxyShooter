@@ -110,6 +110,26 @@ public class Enemy : MonoBehaviour
             Destroy(GetComponent<Collider2D>());
             Destroy(GetComponent<Enemy>());
             Destroy(this.gameObject, 2.5f);
-         }   
+         }  
+         
+         if(other.tag == "HeatSeeker")
+        {
+            Destroy(other.gameObject);
+
+            if (_player != null)
+            {
+                _player.AddToScore(20);
+            }
+
+            _anim.SetTrigger("OnEnemyDeath");
+            _enemySpeed = 0;
+            _enemyAudioSource.Play();
+
+            Destroy(GetComponent<Collider2D>());
+            Destroy(GetComponent<Enemy>());
+            gameObject.tag = "Untagged";
+            Destroy(this.gameObject, 2.5f);
+
+        }
     }
 }
