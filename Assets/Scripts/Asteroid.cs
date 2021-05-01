@@ -23,7 +23,7 @@ public class Asteroid : MonoBehaviour
     void Start()
     {
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
-        _audioSource = GetComponent<AudioSource>();
+      //  _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,8 +44,8 @@ public class Asteroid : MonoBehaviour
             _spawnManager.StartSpawning();
         }
 
-        _audioSource.clip = ExplosionSound;
-        _audioSource.Play();
+       // _audioSource.clip = ExplosionSound;
+       // _audioSource.Play();
         
     }
 }

@@ -11,12 +11,22 @@ public class HomingMissile : MonoBehaviour
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
+        
     }
 
     private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        LookAt2D(target.position);
+        if(target != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            LookAt2D(target.position);
+        }
+        else
+        {
+            return;
+        }
+       
+        
     }
 
     public void LookAt2D(Vector3 lookTarget)
@@ -28,4 +38,5 @@ public class HomingMissile : MonoBehaviour
 
         transform.rotation = Quaternion.LookRotation(zDirection, yDirection);
     }
+
 }

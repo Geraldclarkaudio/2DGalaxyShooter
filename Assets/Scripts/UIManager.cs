@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _ammoText;
 
+
     //handle to text
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,6 @@ public class UIManager : MonoBehaviour
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
-        //assign text component to handle 
 
         if(_gameManager == null)
         {

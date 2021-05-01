@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject Thrusta;
 
+    public float thrustMax = 1f;
+    public float thrustCurrent;
+
     [SerializeField]
     private GameObject laserPrefab;
 
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
 
     private SpawnManager spawnManager;
 
+    //POWERUP STUFF::::::::::::::::::::::::::
     [SerializeField]
     private bool isTripleShotActive = false;
     [SerializeField]
@@ -54,10 +58,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool isHeatSeekActive = false;
 
-    public float missileSpeed = 10f;
+    [SerializeField]
+   private float _canFireHeatSeek = -1.0f;
 
-   
+    [SerializeField]
+    private float heatSeekFireRate = 1.0f;
 
+    //UI MANAGEMENT:::::::::::::::::::::::
+    private UIManager _uiManager;
 
     [SerializeField]
     private int _score;
@@ -73,12 +81,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject leftEngineSprite; 
 
-    private UIManager _uiManager;
-
     [SerializeField]
     private GameObject explosionAnimationPrefab;
 
-    //variable to store audio clip 
+  //AUDIO CLIPS::::::::::::::::::::::::::: 
     [SerializeField]
     private AudioClip _laserFireSound;
 
@@ -88,18 +94,19 @@ public class Player : MonoBehaviour
     [SerializeField]
     private AudioClip _noAmmoSound;
 
+    [SerializeField]
+    private AudioClip _heatSeekSound;
+
     private AudioSource _audioSource;
-    // Start is called before the first frame update
+    
     void Start()
     {
         _ammo = 15;
+        thrustCurrent = 1;
         transform.position = new Vector3(0, 0, 0);
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
-        
-        
-        
 
         if (spawnManager == null)
         {
@@ -122,9 +129,10 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _ammo > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _ammo > 0 && Time.time > _canFireHeatSeek)
         {
             FireLaser();
+            PowerUpFire();
         }
         else if(Input.GetKeyDown(KeyCode.Space) && _ammo < 1)
         {
@@ -144,18 +152,7 @@ public class Player : MonoBehaviour
         //Input moves with this
         transform.Translate(direction * _speed * Time.deltaTime);
         
-            if(Input.GetKey(KeyCode.LeftShift))
-            {
-                _speed = _thrusterSpeed;
-                Thrusta.SetActive(true);
-            }
-            else
-            {
-                _speed = 5f;
-                Thrusta.SetActive(false);
-            }
-        
-       
+        ThrustUpdate();
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
@@ -169,34 +166,62 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ThrustUpdate()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _speed = _thrusterSpeed;
+            thrustCurrent = thrustCurrent -0.20f * Time.deltaTime;
+            if(thrustCurrent <= 0)
+            {
+                thrustCurrent = 0;
+                _speed = 5f;
+            }
+            Thrusta.SetActive(true);
+
+        }
+        else
+        {
+            _speed = 5f;
+            if(thrustCurrent < 1f)
+            {
+                thrustCurrent = thrustCurrent + 0.10f * Time.deltaTime;
+            }
+            Thrusta.SetActive(false);
+
+        }
+    }
+
     void FireLaser()
     {
-
+        if (isHeatSeekActive == true) // stops the regular laser from firing at the same time as the heat seeking laser
+        {
+            return;
+        }
         _canFire = Time.time + _fireRate;
-        // Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity); 
+        _audioSource.clip = _laserFireSound;
+        Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+        MinusAmmo(1);
+        _audioSource.Play();
+       
+    }
+
+    public void PowerUpFire()
+
+    {
 
         if (isTripleShotActive == true)
         {
             _audioSource.clip = _laserFireSound;
             Instantiate(tripleShotPrefab, transform.position, Quaternion.identity);
         }
-        else if(isHeatSeekActive == true)
+        if (isHeatSeekActive == true && GameObject.Find("Enemy(Clone)").GetComponent<Collider2D>() != null)
         {
+            _canFireHeatSeek = Time.time + heatSeekFireRate;
             Instantiate(heatSeekPowerUp, transform.position, Quaternion.identity);
-            
-        }
-        else
-        {
-            _audioSource.clip = _laserFireSound;
-            Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
-            MinusAmmo(1);
-           
-        }
 
-        //play laser audio clip 
-        _audioSource.Play();
+        }
     }
-
     public void Damage()
     {
         if(isShieldActive == true)
@@ -330,16 +355,18 @@ public class Player : MonoBehaviour
     public void HeatSeek()
     {
         isHeatSeekActive = true;
+        
         StartCoroutine(HeatSeekActiveRoutine());
     }
 
-    IEnumerator HeatSeekActiveRoutine()
+    IEnumerator HeatSeekActiveRoutine() // sets the cooldown for power up
     {
         while (isHeatSeekActive == true)
         {
             yield return new WaitForSeconds(10);
             isHeatSeekActive = false;
         }
+       
            
     }
 }

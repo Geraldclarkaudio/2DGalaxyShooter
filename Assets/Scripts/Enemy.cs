@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Animator _anim;
+    private SpawnManager spawnManager;//
 
     [SerializeField]
     private float _enemySpeed = 4;
@@ -17,13 +18,15 @@ public class Enemy : MonoBehaviour
     private float _fireRate = 3.0f;
     private float _canFire = -1.0f;
 
+
     private AudioSource _enemyAudioSource;
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
         _enemyAudioSource = GetComponent<AudioSource>();
-        
-        if(_player == null)
+        spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//
+
+        if (_player == null)
         {
             Debug.LogError("Player is Null");
         }
@@ -38,6 +41,11 @@ public class Enemy : MonoBehaviour
         if(_enemyAudioSource == null)
         {
             Debug.LogError("AudioSource On Enemy is Null");
+        }
+        
+        if(spawnManager == null)
+        {
+            Debug.LogError("The Spawn Manager is NULL on Enemy");
         }
     }
 
@@ -72,7 +80,7 @@ public class Enemy : MonoBehaviour
         if (transform.position.y < -4f)
         {
             float randomX = Random.Range(-9.8f, 9.8f);
-            transform.position = new Vector3(randomX, 7.5f, 0);
+            transform.position = new Vector3(randomX, 7.0f, 0);
         }
     }
     private void OnTriggerEnter2D(Collider2D other)
