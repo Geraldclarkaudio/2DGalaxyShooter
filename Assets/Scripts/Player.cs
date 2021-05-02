@@ -98,6 +98,9 @@ public class Player : MonoBehaviour
     private AudioClip _heatSeekSound;
 
     private AudioSource _audioSource;
+
+    //ANIMATOR 
+    private Animator animator;
     
     void Start()
     {
@@ -107,6 +110,7 @@ public class Player : MonoBehaviour
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        animator = GameObject.Find("Main Camera").GetComponent<Animator>();
 
         if (spawnManager == null)
         {
@@ -170,14 +174,17 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            Thrusta.SetActive(true);
             _speed = _thrusterSpeed;
             thrustCurrent = thrustCurrent -0.20f * Time.deltaTime;
+
             if(thrustCurrent <= 0)
             {
                 thrustCurrent = 0;
                 _speed = 5f;
+                Thrusta.SetActive(false);
             }
-            Thrusta.SetActive(true);
+           
 
         }
         else
@@ -251,6 +258,7 @@ public class Player : MonoBehaviour
         {
             _lives--;
 
+            animator.SetTrigger("CameraShake");
             if(_lives == 2)
             {
                 rightEngineSprite.SetActive(true);

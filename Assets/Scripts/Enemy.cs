@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     private Animator _anim;
     private SpawnManager spawnManager;//
 
+    private Animator cameraAnimator;
+
     [SerializeField]
     private float _enemySpeed = 4;
 
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
         _player = GameObject.Find("Player").GetComponent<Player>();
         _enemyAudioSource = GetComponent<AudioSource>();
         spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//
+        cameraAnimator = GameObject.Find("Main Camera").GetComponent<Animator>();
 
         if (_player == null)
         {
@@ -95,6 +98,7 @@ public class Enemy : MonoBehaviour
                  player.Damage();
              }
 
+            
             _anim.SetTrigger("OnEnemyDeath");
             _enemySpeed = 0;
             _enemyAudioSource.Play();
@@ -111,6 +115,8 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddToScore(10);
             }
+            
+            cameraAnimator.SetTrigger("CameraShake");
             _anim.SetTrigger("OnEnemyDeath");
             _enemySpeed = 0;
             _enemyAudioSource.Play();
@@ -128,7 +134,7 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddToScore(20);
             }
-
+            cameraAnimator.SetTrigger("CameraShake");
             _anim.SetTrigger("OnEnemyDeath");
             _enemySpeed = 0;
             _enemyAudioSource.Play();
