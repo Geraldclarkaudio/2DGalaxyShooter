@@ -32,7 +32,7 @@ public class FillStatusBar : MonoBehaviour
         {
             fillImage.enabled = true;
         }
-
+         
         float fillValue = player.thrustCurrent / player.thrustMax;
         slider.value = fillValue;
     }

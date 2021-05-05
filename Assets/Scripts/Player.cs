@@ -190,6 +190,7 @@ public class Player : MonoBehaviour
         else
         {
             _speed = 5f;
+
             if(thrustCurrent < 1f)
             {
                 thrustCurrent = thrustCurrent + 0.10f * Time.deltaTime;

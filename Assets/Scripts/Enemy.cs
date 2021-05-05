@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour
     private Animator _anim;
     private SpawnManager spawnManager;//
 
+    [SerializeField]
+    private GameObject explosionPrefab;
+
     private Animator cameraAnimator;
 
     [SerializeField]
@@ -78,7 +81,8 @@ public class Enemy : MonoBehaviour
 
     void CalculateMovement()
     {
-        transform.Translate(new Vector3(0, -1, 0) * _enemySpeed * Time.deltaTime);
+
+        transform.Translate(new Vector3(0,-1,0) * _enemySpeed * Time.deltaTime);
 
         if (transform.position.y < -4f)
         {
