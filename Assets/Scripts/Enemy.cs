@@ -7,9 +7,6 @@ public class Enemy : MonoBehaviour
     private Animator _anim;
     private SpawnManager spawnManager;//
 
-    [SerializeField]
-    private GameObject explosionPrefab;
-
     private Animator cameraAnimator;
 
     [SerializeField]

@@ -18,17 +18,27 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField]
     private bool isEnemyAlive = false;//
-    
-
-
     private bool stopSpawning = false;
+
+    //wave stuff
+    [SerializeField]
+    private int _wave;
+    [SerializeField]
+    private int _enemySpawned;
+
+    private UIManager _uiManager;
     // Start is called before the first frame update
 
-   
+    private void Start()
+    {
+        _wave = 1;
+        _enemySpawned = 0;
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+    }
     public void StartSpawning()
     {
-        StartCoroutine(SpawnEnemyRoutine());
-        StartCoroutine(SpawnFollowEnemyRoutine());
+
+        StartCoroutine(Wave1Spawn());
         StartCoroutine(SpawnPowerUpRoutine());
     }
 
@@ -38,35 +48,72 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    IEnumerator SpawnEnemyRoutine()
+    IEnumerator Wave1Spawn()
     {
-
         yield return new WaitForSeconds(3.0f);
-        //while loop 
-        while (stopSpawning == false)
+
+        while (_enemySpawned < 10 && stopSpawning == false)
         {
-            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8.0f), 7, 0);
-            GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
+            //spawn regular enemy
+             Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+             GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
+             newEnemy.transform.parent = _enemyContainer.transform;
+             _enemySpawned++;
+
+            yield return new WaitForSeconds(3.0f);
+
+            //Spawn Follower Enemy
+            Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject followEnemy = Instantiate(_followerEnemyPrefab, posToSpawn2, Quaternion.identity);
+            followEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
             
 
-            newEnemy.transform.parent = _enemyContainer.transform;
-            
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(5.0f);
+        }
+
+        if (_enemySpawned == 10)
+        {
+            _wave++;
+            _uiManager.UpdateWave(_wave);
+            _enemySpawned = 0;
+            StopCoroutine(Wave1Spawn());
+            yield return new WaitForSeconds(5.0f);
+            StartCoroutine(Wave2Spawn());
         }
     }
 
-    IEnumerator SpawnFollowEnemyRoutine()
+    IEnumerator Wave2Spawn()
     {
         yield return new WaitForSeconds(10.0f);
 
-        while (stopSpawning == false)
+        while (_enemySpawned < 20 && stopSpawning == false)
         {
-            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8.0f), 7, 0);
-            GameObject follower = Instantiate(_followerEnemyPrefab, posToSpawn, Quaternion.identity);
-            follower.transform.parent = _enemyContainer.transform;
+            //spawn regular enemy
+            Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
+            newEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
 
-            yield return new WaitForSeconds(5f);
-        }    
+            //Spawn Follower Enemy
+            Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject followEnemy = Instantiate(_followerEnemyPrefab, posToSpawn2, Quaternion.identity);
+            followEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+
+
+            yield return new WaitForSeconds(2.0f);
+        }
+
+        if (_enemySpawned == 20)
+        {
+            _wave++;
+            _uiManager.UpdateWave(_wave);
+            _enemySpawned = 0;
+            StopCoroutine(Wave2Spawn());
+            yield return new WaitForSeconds(5.0f);
+            //StartCoroutine(Wave3Spawn());
+        }
     }
 
     IEnumerator SpawnPowerUpRoutine()
@@ -81,6 +128,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(3f, 8f));
         }
     }
+
 
     public void OnPlayerDeath()
     {

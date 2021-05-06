@@ -15,6 +15,12 @@ public class UIManager : MonoBehaviour
     private Text _restartText;
 
     [SerializeField]
+    private Text _waveText;
+
+    [SerializeField]
+    private int _wave;
+
+    [SerializeField]
     private Image _livesImg;
 
     [SerializeField]
@@ -33,6 +39,8 @@ public class UIManager : MonoBehaviour
     {
         _ammoText.text = "Ammo: " + 15;
         _scoreText.text = "Score: " + 0;
+        _waveText.text = "Wave: " + 0;
+        _waveText.gameObject.SetActive(false);
         _gameOverText.gameObject.SetActive(false);
         _restartText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
@@ -48,6 +56,22 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpdateWave(int currentwave)
+    {
+        _wave = currentwave;
+        StartCoroutine(ShowWave());
+    }
+
+    public IEnumerator ShowWave()
+    {
+        _waveText.text = "Wave: " + _wave;
+        _waveText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        _waveText.gameObject.SetActive(false);
     }
 
     public void UpdateScore(int playerScore)
