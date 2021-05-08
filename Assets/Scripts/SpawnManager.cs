@@ -11,6 +11,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject _followerEnemyPrefab;
 
     [SerializeField]
+    private GameObject _laserEnemyPrefab;
+
+    [SerializeField]
     private GameObject _enemyContainer;
 
     [SerializeField]
@@ -54,13 +57,17 @@ public class SpawnManager : MonoBehaviour
 
         while (_enemySpawned < 10 && stopSpawning == false)
         {
+           if(_enemySpawned == 0)
+            {
+                _uiManager.UpdateWave(_wave);
+            }
             //spawn regular enemy
-             Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
              GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
              newEnemy.transform.parent = _enemyContainer.transform;
              _enemySpawned++;
 
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(2.0f);
 
             //Spawn Follower Enemy
             Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
@@ -69,7 +76,7 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
             
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(4.0f);
         }
 
         if (_enemySpawned == 10)
@@ -85,15 +92,17 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator Wave2Spawn()
     {
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(3.0f);
 
         while (_enemySpawned < 20 && stopSpawning == false)
         {
+            
             //spawn regular enemy
             Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
             GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
+            yield return new WaitForSeconds(Random.Range(2.0f, 5));
 
             //Spawn Follower Enemy
             Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
@@ -102,7 +111,7 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
 
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(Random.Range(4.0f, 6.0f));
         }
 
         if (_enemySpawned == 20)
@@ -112,7 +121,51 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned = 0;
             StopCoroutine(Wave2Spawn());
             yield return new WaitForSeconds(5.0f);
-            //StartCoroutine(Wave3Spawn());
+            StartCoroutine(Wave3Spawn());
+        }
+    }
+
+    IEnumerator Wave3Spawn()
+    {
+        yield return new WaitForSeconds(3.0f);
+
+        while (_enemySpawned < 40 && stopSpawning == false)
+        {
+
+            //spawn regular enemy
+            Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
+            newEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+            yield return new WaitForSeconds(Random.Range(2.0f, 5));
+
+            //Spawn Follower Enemy
+            Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject followEnemy = Instantiate(_followerEnemyPrefab, posToSpawn2, Quaternion.identity);
+            followEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+
+            yield return new WaitForSeconds(Random.Range(4.0f, 6.0f));
+
+            //Spawn Laser Beam Enemy
+            Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject laserEnemy = Instantiate(_laserEnemyPrefab, posToSpawn2, Quaternion.identity);
+            followEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+
+
+            yield return new WaitForSeconds(Random.Range(2.0f, 5.0f));
+        }
+
+        if (_enemySpawned == 40)
+        {
+            _wave++;
+            _uiManager.UpdateWave(_wave);
+            _enemySpawned = 0;
+            StopCoroutine(Wave3Spawn());
+            yield return new WaitForSeconds(5.0f);
+            //StartCoroutine BOSS BATTLE
+
         }
     }
 

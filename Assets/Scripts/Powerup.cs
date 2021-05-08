@@ -7,6 +7,9 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private float _speed = 3f;
 
+    [SerializeField]
+    private Transform _playerTrans;
+
     //ID for Powerups
     //0 = triple shot 
     //1 = speed
@@ -19,7 +22,7 @@ public class Powerup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        _playerTrans = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,12 @@ public class Powerup : MonoBehaviour
         if (transform.position.y < -6.5f)
         {
             Destroy(this.gameObject);
+        }
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            _speed = 0;
+            transform.position = Vector2.MoveTowards(transform.position, _playerTrans.position, 5 * Time.deltaTime);
         }
     }
 

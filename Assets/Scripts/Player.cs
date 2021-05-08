@@ -318,7 +318,7 @@ public class Player : MonoBehaviour
             isSpeedBoostActive = false;
             _speed /= _speedMultiplier;
         }
-    }
+    } // powers down speed boost after 5 seconds
 
     public void ShieldActive()
     {
