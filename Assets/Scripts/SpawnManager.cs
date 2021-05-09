@@ -137,6 +137,7 @@ public class SpawnManager : MonoBehaviour
             GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
+
             yield return new WaitForSeconds(Random.Range(2.0f, 5));
 
             //Spawn Follower Enemy
@@ -150,7 +151,7 @@ public class SpawnManager : MonoBehaviour
             //Spawn Laser Beam Enemy
             Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
             GameObject laserEnemy = Instantiate(_laserEnemyPrefab, posToSpawn2, Quaternion.identity);
-            followEnemy.transform.parent = _enemyContainer.transform;
+            laserEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
 
 
