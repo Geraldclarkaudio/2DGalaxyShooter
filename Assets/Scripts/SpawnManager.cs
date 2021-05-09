@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] powerups;
 
     [SerializeField]
-    private bool isEnemyAlive = false;//
+    private bool isEnemyAlive = false;
     private bool stopSpawning = false;
 
     //wave stuff
@@ -67,7 +67,7 @@ public class SpawnManager : MonoBehaviour
              newEnemy.transform.parent = _enemyContainer.transform;
              _enemySpawned++;
 
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(1.0f);
 
             //Spawn Follower Enemy
             Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
@@ -76,7 +76,7 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
             
 
-            yield return new WaitForSeconds(4.0f);
+            yield return new WaitForSeconds(2.5f);
         }
 
         if (_enemySpawned == 10)
@@ -102,7 +102,7 @@ public class SpawnManager : MonoBehaviour
             GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
-            yield return new WaitForSeconds(Random.Range(2.0f, 5));
+            yield return new WaitForSeconds(Random.Range(1.0f, 2));
 
             //Spawn Follower Enemy
             Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
@@ -111,7 +111,7 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
 
 
-            yield return new WaitForSeconds(Random.Range(4.0f, 6.0f));
+            yield return new WaitForSeconds(Random.Range(1.0f, 2.5f));
         }
 
         if (_enemySpawned == 20)
@@ -138,7 +138,7 @@ public class SpawnManager : MonoBehaviour
             newEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
 
-            yield return new WaitForSeconds(Random.Range(2.0f, 5));
+            yield return new WaitForSeconds(Random.Range(1.0f, 2));
 
             //Spawn Follower Enemy
             Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
@@ -146,7 +146,7 @@ public class SpawnManager : MonoBehaviour
             followEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
 
-            yield return new WaitForSeconds(Random.Range(4.0f, 6.0f));
+            yield return new WaitForSeconds(Random.Range(1.0f, 2.5f));
 
             //Spawn Laser Beam Enemy
             Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
@@ -155,7 +155,7 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
 
 
-            yield return new WaitForSeconds(Random.Range(2.0f, 5.0f));
+            yield return new WaitForSeconds(Random.Range(4.0f, 5.0f));
         }
 
         if (_enemySpawned == 40)
@@ -165,10 +165,18 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned = 0;
             StopCoroutine(Wave3Spawn());
             yield return new WaitForSeconds(5.0f);
-            //StartCoroutine BOSS BATTLE
+            StartCoroutine(BossBattle());
 
         }
     }
+
+    IEnumerator BossBattle()
+    {
+       //Fight the dang ol boss
+
+        yield return new WaitForSeconds(5);
+    }
+
 
     IEnumerator SpawnPowerUpRoutine()
     {
@@ -179,7 +187,7 @@ public class SpawnManager : MonoBehaviour
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
             int randomPowerUp = Random.Range(0, 6);
             Instantiate(powerups[randomPowerUp], posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(3f, 8f));
+            yield return new WaitForSeconds(Random.Range(3f, 4f));
         }
     }
 

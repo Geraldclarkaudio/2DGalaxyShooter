@@ -18,6 +18,15 @@ public class LaserBeamEnemy : MonoBehaviour
     [SerializeField]
     private int hitPoints;
 
+    [SerializeField]
+    private GameObject rightEngineSprite;
+
+    [SerializeField]
+    private GameObject leftEngineSprite;
+
+    [SerializeField]
+    private GameObject _ExplodeAnimPrefab;
+
     private Player _player;
 
     private AudioSource _enemyAudioSource;
@@ -129,19 +138,22 @@ public class LaserBeamEnemy : MonoBehaviour
 
             if(hitPoints == 2)
             {
-                //Set animation trigger 
+               
+                rightEngineSprite.SetActive(true);
                
             }
             if(hitPoints == 1)
             {
-                //set anim trigger
+                
+                leftEngineSprite.SetActive(true);
             }
 
             if(hitPoints < 1)
             {
                 _enemySpeed = 0;
+                Instantiate(_ExplodeAnimPrefab, transform.position, Quaternion.identity);
                 Destroy(GetComponent<LaserBeamEnemy>());
-                Destroy(this.gameObject, 2.5f);
+                Destroy(this.gameObject);
             }
 
             

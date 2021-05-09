@@ -66,6 +66,10 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator ShowWave()
     {
+        if(_wave == 4)
+        {
+            _waveText.text = "BOSS BATTLE";
+        }
         _waveText.text = "Wave: " + _wave;
         _waveText.gameObject.SetActive(true);
 
