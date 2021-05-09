@@ -53,7 +53,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8841317782557907499}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 8841317782571845517}
   m_Layer: 0
   m_Name: laser
-  m_TagString: Laser
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 8841317782677662478}
   m_Layer: 0
   m_Name: laser (5)
-  m_TagString: Untagged
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 8841317782777473363}
   m_Layer: 0
   m_Name: laser (3)
-  m_TagString: Untagged
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 8841317782870940170}
   m_Layer: 0
   m_Name: laser (2)
-  m_TagString: Untagged
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -659,7 +659,7 @@ GameObject:
   - component: {fileID: 8841317783296274991}
   m_Layer: 0
   m_Name: laser (1)
-  m_TagString: Laser
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 8841317783305188813}
   m_Layer: 0
   m_Name: laser (7)
-  m_TagString: Untagged
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1037,7 +1037,7 @@ GameObject:
   - component: {fileID: 8841317784007515602}
   m_Layer: 0
   m_Name: laser (4)
-  m_TagString: Untagged
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1301,7 +1301,7 @@ GameObject:
   - component: {fileID: 8841317784366083522}
   m_Layer: 0
   m_Name: laser (6)
-  m_TagString: Untagged
+  m_TagString: BossLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

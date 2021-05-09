@@ -66,11 +66,24 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator ShowWave()
     {
+      
+        _waveText.text = "Wave: " + _wave;
         if(_wave == 4)
         {
             _waveText.text = "BOSS BATTLE";
         }
-        _waveText.text = "Wave: " + _wave;
+        if(_wave == 5)
+        {
+            _waveText.text = "YOU SAVED THE GALAXY!";
+
+
+            yield return new WaitForSeconds(5f);//happens 5 seconds after final hit on boss
+
+            _waveText.gameObject.SetActive(true);
+            GameOverSequence();
+
+        }
+
         _waveText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2f);

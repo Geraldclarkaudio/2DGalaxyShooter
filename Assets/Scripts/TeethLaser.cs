@@ -19,6 +19,8 @@ public class TeethLaser : MonoBehaviour
         if(transform.position.y < -5.0f)
         {
             Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
+            
         }
     }
 }

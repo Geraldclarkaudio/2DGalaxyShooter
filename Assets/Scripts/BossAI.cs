@@ -7,6 +7,13 @@ public class BossAI : MonoBehaviour
     [SerializeField]
     private float _speed = 3;
 
+    private Animator cameraAnimator;
+
+    [SerializeField]
+    private GameObject ExplosionEffect;
+
+    [SerializeField]
+    private Transform[] explosionArea;
 
     [SerializeField]
     private GameObject teethLasers;
@@ -28,6 +35,9 @@ public class BossAI : MonoBehaviour
 
     int waypointIndex = 0;
 
+    public SpawnManager _spawnManager;
+    public GameManager _gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +45,11 @@ public class BossAI : MonoBehaviour
 
         waypoints[0] = GameObject.Find("BossWaypoint").GetComponent<Transform>();
         waypoints[1] = GameObject.Find("BossWaypoint (1)").GetComponent<Transform>();
+        cameraAnimator = GameObject.Find("Main Camera").GetComponent<Animator>();
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+
+        Color originalColor = GetComponent<Renderer>().material.color;
 
     }
 
@@ -86,10 +101,28 @@ public class BossAI : MonoBehaviour
 
     IEnumerator Hurt()
     {
-        Color originalColor = GetComponent<Renderer>().material.color;
         GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(0.01f);
-        GetComponent<Renderer>().material.color = originalColor;
+        yield return new WaitForSeconds(0.15f);
+        GetComponent<Renderer>().material.color = Color.white;
+        
+    }
+
+    IEnumerator DyingRoutine()
+    {
+        GameObject explosion01 = Instantiate(ExplosionEffect, explosionArea[0].position, Quaternion.identity);
+        Destroy(explosion01, 2f);
+        yield return new WaitForSeconds(1);
+        GameObject explosion02 = Instantiate(ExplosionEffect, explosionArea[1].position, Quaternion.identity);
+        Destroy(explosion02, 2f);
+        yield return new WaitForSeconds(1);
+        GameObject explosion03 = Instantiate(ExplosionEffect, explosionArea[2].position, Quaternion.identity);
+        Destroy(explosion03, 2f);
+        yield return new WaitForSeconds(1);
+        GameObject explosion04 = Instantiate(ExplosionEffect, explosionArea[3].position, Quaternion.identity);
+        Destroy(explosion04, 2f);
+        yield return new WaitForSeconds(1);
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -104,6 +137,7 @@ public class BossAI : MonoBehaviour
 
         if(other.tag == "Laser" && isDead == false)
         {
+            cameraAnimator.SetTrigger("CameraShake");
             Destroy(other.gameObject);
             _lives--;
             StartCoroutine(Hurt());
@@ -112,7 +146,11 @@ public class BossAI : MonoBehaviour
         if(_lives <= 0 && isDead == false)
         {
             isDead = true;
-            //dyingroutine
+            _speed = 0;
+            _spawnManager.YouWin();
+            _gameManager.GameOver();
+            StartCoroutine(DyingRoutine());
+            Destroy(this.gameObject, 5f);
 
 
         }

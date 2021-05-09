@@ -43,9 +43,6 @@ public class Asteroid : MonoBehaviour
 
             _spawnManager.StartSpawning();
         }
-
-       // _audioSource.clip = ExplosionSound;
-       // _audioSource.Play();
         
     }
 }

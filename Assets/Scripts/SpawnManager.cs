@@ -8,6 +8,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyPrefab;
 
     [SerializeField]
+    private GameObject _bossEnemyPrefab;
+
+    [SerializeField]
     private GameObject _followerEnemyPrefab;
 
     [SerializeField]
@@ -102,7 +105,7 @@ public class SpawnManager : MonoBehaviour
             GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
-            yield return new WaitForSeconds(Random.Range(1.0f, 2));
+            yield return new WaitForSeconds(1.0f);
 
             //Spawn Follower Enemy
             Vector3 posToSpawn2 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
@@ -111,7 +114,7 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
 
 
-            yield return new WaitForSeconds(Random.Range(1.0f, 2.5f));
+            yield return new WaitForSeconds(2.5f);
         }
 
         if (_enemySpawned == 20)
@@ -158,13 +161,13 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(4.0f, 5.0f));
         }
 
-        if (_enemySpawned == 40)
+        if (_enemySpawned >= 40)
         {
             _wave++;
             _uiManager.UpdateWave(_wave);
             _enemySpawned = 0;
             StopCoroutine(Wave3Spawn());
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(2.0f);
             StartCoroutine(BossBattle());
 
         }
@@ -172,9 +175,27 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator BossBattle()
     {
-       //Fight the dang ol boss
+        yield return new WaitForSeconds(2);
 
-        yield return new WaitForSeconds(5);
+        while (_enemySpawned < 1 && stopSpawning == false)
+        {
+            Vector3 posToSpawn4 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject BossEnemy = Instantiate(_bossEnemyPrefab, posToSpawn4, Quaternion.identity);
+            BossEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+            StopCoroutine(BossBattle());
+            yield return new WaitForSeconds(5f);
+        }
+
+
+        
+    }
+
+    public void YouWin()
+    {
+        _wave++;
+        _uiManager.UpdateWave(_wave);
+        StopCoroutine(SpawnPowerUpRoutine());
     }
 
 
@@ -196,6 +217,7 @@ public class SpawnManager : MonoBehaviour
     {
         stopSpawning = true;
     }
+  
 
     public void EnemyAlive()//
 

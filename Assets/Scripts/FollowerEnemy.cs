@@ -62,6 +62,11 @@ public class FollowerEnemy : MonoBehaviour
             
         }
 
+        if(transform.position.y < -5.0f)
+        {
+            Destroy(this.gameObject);
+        }
+
 
     }// Move Towards Player Until Y position is < Player's
 
