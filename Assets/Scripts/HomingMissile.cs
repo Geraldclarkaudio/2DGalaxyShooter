@@ -6,12 +6,16 @@ public class HomingMissile : MonoBehaviour
 {
     public float speed;
 
+    [SerializeField]
     private Transform target;
+
+    //[SerializeField]
+    //private GameObject[] target2;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
-        
+       // target2 = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     private void Update()
@@ -20,7 +24,9 @@ public class HomingMissile : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
             LookAt2D(target.position);
+            
         }
+       
         else
         {
             return;

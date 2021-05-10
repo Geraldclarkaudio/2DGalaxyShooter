@@ -474,14 +474,23 @@ MonoBehaviour:
     type: 3}
   _enemyContainer: {fileID: 1619170653}
   powerups:
+  - {fileID: 686641914915422231, guid: b31078958b6288e4890b66621a5e2427, type: 3}
+  - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
+  - {fileID: 8073997846462604206, guid: a7ca6acbbb9efca45a2ac2f1cab0cce8, type: 3}
+  - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
   - {fileID: 8040909580450887359, guid: e9b8afc33b3d24a439e583fabed55ad9, type: 3}
   - {fileID: 8977601670858798797, guid: ba1057e1a96d73742a94a5024e9c9367, type: 3}
-  - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
+  powerup:
   - {fileID: 686641914915422231, guid: b31078958b6288e4890b66621a5e2427, type: 3}
-  - {fileID: 8073997846462604206, guid: a7ca6acbbb9efca45a2ac2f1cab0cce8, type: 3}
   - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
+  - {fileID: 8073997846462604206, guid: a7ca6acbbb9efca45a2ac2f1cab0cce8, type: 3}
+  - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
+  - {fileID: 8040909580450887359, guid: e9b8afc33b3d24a439e583fabed55ad9, type: 3}
+  table: 28000000190000000f0000000a00000008000000
+  total: 0
+  randomNumber: 0
   isEnemyAlive: 0
-  _wave: 0
+  _wave: 3
   _enemySpawned: 0
 --- !u!4 &357008996
 Transform:

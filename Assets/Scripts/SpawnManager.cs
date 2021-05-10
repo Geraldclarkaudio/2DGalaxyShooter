@@ -19,11 +19,24 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyContainer;
 
-    [SerializeField]
-    private GameObject[] powerups;
+
+    //POWERUP SPAWN MANAGER STUFF
+    public int total;
+    public int randomNumber;
+
+    public List<GameObject> powerup;
+
+    public int[] table = {
+        
+        40, //ammo
+        25, // heat seek
+        15,//health
+        10, // shield
+        8 //triple 
+    };
 
     [SerializeField]
-    private bool isEnemyAlive = false;
+  
     private bool stopSpawning = false;
 
     //wave stuff
@@ -33,6 +46,8 @@ public class SpawnManager : MonoBehaviour
     private int _enemySpawned;
 
     private UIManager _uiManager;
+
+
     // Start is called before the first frame update
 
     private void Start()
@@ -40,23 +55,50 @@ public class SpawnManager : MonoBehaviour
         _wave = 1;
         _enemySpawned = 0;
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
     }
     public void StartSpawning()
     {
 
         StartCoroutine(Wave1Spawn());
-        StartCoroutine(SpawnPowerUpRoutine());
+       StartCoroutine(SpawnPowerUpRoutine());
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
 
+    void ChooseAPowerUp()
+    {
+        total = 0;
+
+        foreach (var item in table)
+        {
+            total += item;
+        }
+
+        randomNumber = Random.Range(0, total);
+
+        for (int i = 0; i < table.Length; i++)
+        {
+            if (randomNumber <= table[i])
+            {
+                Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+                Instantiate(powerup[i], posToSpawn, Quaternion.identity);
+                return;
+            }
+            else
+            {
+                randomNumber -= table[i];
+            }
+        }
     }
 
     IEnumerator Wave1Spawn()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
 
         while (_enemySpawned < 10 && stopSpawning == false)
         {
@@ -95,7 +137,6 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator Wave2Spawn()
     {
-        yield return new WaitForSeconds(3.0f);
 
         while (_enemySpawned < 20 && stopSpawning == false)
         {
@@ -130,7 +171,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator Wave3Spawn()
     {
-        yield return new WaitForSeconds(3.0f);
+        
 
         while (_enemySpawned < 40 && stopSpawning == false)
         {
@@ -185,30 +226,17 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
             StopCoroutine(BossBattle());
             yield return new WaitForSeconds(5f);
-        }
-
-
-        
+        }  
     }
-
-    public void YouWin()
-    {
-        _wave++;
-        _uiManager.UpdateWave(_wave);
-        StopCoroutine(SpawnPowerUpRoutine());
-    }
-
 
     IEnumerator SpawnPowerUpRoutine()
     {
-        yield return new WaitForSeconds(3.0f);
-
         while (stopSpawning == false)
         {
-            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            int randomPowerUp = Random.Range(0, 6);
-            Instantiate(powerups[randomPowerUp], posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(3f, 4f));
+            ChooseAPowerUp();
+
+            yield return new WaitForSeconds(Random.Range(2f,2.5f));
+
         }
     }
 
@@ -217,12 +245,12 @@ public class SpawnManager : MonoBehaviour
     {
         stopSpawning = true;
     }
-  
 
-    public void EnemyAlive()//
-
+    public void YouWin()
     {
-        isEnemyAlive = true;
+        _wave++;
+        _uiManager.UpdateWave(_wave);
+        StopCoroutine(SpawnPowerUpRoutine());
     }
 }
 
