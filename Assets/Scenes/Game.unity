@@ -466,6 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8290560209499805978, guid: b15ebabde5c22fa44a8988f00b5eac2b,
     type: 3}
+  _behindEnemyPrefab: {fileID: 3808128335243008725, guid: 0344f7a5e8b1a6f438a907eaae6b2201,
+    type: 3}
   _bossEnemyPrefab: {fileID: 1298866900794591664, guid: 620a50e6e97fba74daf90e5c832ea25c,
     type: 3}
   _followerEnemyPrefab: {fileID: 1775534232551185079, guid: ff9d0a70b48914c41a342569399109c2,
@@ -473,13 +475,8 @@ MonoBehaviour:
   _laserEnemyPrefab: {fileID: 1975051010419323938, guid: d9ebe5fdb390fad4e9c1b38a89abf10d,
     type: 3}
   _enemyContainer: {fileID: 1619170653}
-  powerups:
-  - {fileID: 686641914915422231, guid: b31078958b6288e4890b66621a5e2427, type: 3}
-  - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
-  - {fileID: 8073997846462604206, guid: a7ca6acbbb9efca45a2ac2f1cab0cce8, type: 3}
-  - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
-  - {fileID: 8040909580450887359, guid: e9b8afc33b3d24a439e583fabed55ad9, type: 3}
-  - {fileID: 8977601670858798797, guid: ba1057e1a96d73742a94a5024e9c9367, type: 3}
+  total: 0
+  randomNumber: 0
   powerup:
   - {fileID: 686641914915422231, guid: b31078958b6288e4890b66621a5e2427, type: 3}
   - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
@@ -487,9 +484,7 @@ MonoBehaviour:
   - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
   - {fileID: 8040909580450887359, guid: e9b8afc33b3d24a439e583fabed55ad9, type: 3}
   table: 28000000190000000f0000000a00000008000000
-  total: 0
-  randomNumber: 0
-  isEnemyAlive: 0
+  stopSpawning: 0
   _wave: 3
   _enemySpawned: 0
 --- !u!4 &357008996
@@ -2152,7 +2147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619170653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.23, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 357008996}

@@ -8,6 +8,9 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyPrefab;
 
     [SerializeField]
+    private GameObject _behindEnemyPrefab;
+
+    [SerializeField]
     private GameObject _bossEnemyPrefab;
 
     [SerializeField]
@@ -122,6 +125,13 @@ public class SpawnManager : MonoBehaviour
             
 
             yield return new WaitForSeconds(2.5f);
+
+            Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject behindEnemy = Instantiate(_behindEnemyPrefab, posToSpawn3, Quaternion.Euler(0,0,90));
+            behindEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+
+            yield return new WaitForSeconds(3f);
         }
 
         if (_enemySpawned == 10)
@@ -156,6 +166,13 @@ public class SpawnManager : MonoBehaviour
 
 
             yield return new WaitForSeconds(2.5f);
+
+            Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject behindEnemy = Instantiate(_behindEnemyPrefab, posToSpawn3, Quaternion.Euler(0, 0, 90));
+            followEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+
+            yield return new WaitForSeconds(3f);
         }
 
         if (_enemySpawned == 20)
@@ -191,6 +208,7 @@ public class SpawnManager : MonoBehaviour
             _enemySpawned++;
 
             yield return new WaitForSeconds(Random.Range(1.0f, 2.5f));
+
 
             //Spawn Laser Beam Enemy
             Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);

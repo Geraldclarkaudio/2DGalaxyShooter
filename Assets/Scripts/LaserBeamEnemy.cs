@@ -123,6 +123,14 @@ public class LaserBeamEnemy : MonoBehaviour
         
     }
 
+    IEnumerator Hurt()
+    {
+        GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.15f);
+        GetComponent<Renderer>().material.color = Color.white;
+
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -130,6 +138,8 @@ public class LaserBeamEnemy : MonoBehaviour
         {
             hitPoints--;
             Destroy(other.gameObject);
+
+            StartCoroutine(Hurt());
 
             if (_player != null)
             {
