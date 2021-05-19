@@ -9,6 +9,8 @@ TagManager:
   - HeatSeeker
   - Target2
   - BossLaser
+  - Powerup
+  - EnemyLaser
   layers:
   - Default
   - TransparentFX

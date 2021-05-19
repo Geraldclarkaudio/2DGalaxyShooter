@@ -145,6 +145,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   target: {fileID: 0}
-  target2:
+  targets:
+  - {fileID: 5621575006814380315, guid: 20e151cff651834479a6fa8fb4ed0365, type: 3}
   - {fileID: 8290560209499805978, guid: b15ebabde5c22fa44a8988f00b5eac2b, type: 3}
   - {fileID: 1775534232551185079, guid: ff9d0a70b48914c41a342569399109c2, type: 3}
+  - {fileID: 8290560209499805978, guid: 6738baeedecdf984da59840e8fab2709, type: 3}
+  - {fileID: 1298866900794591664, guid: 620a50e6e97fba74daf90e5c832ea25c, type: 3}
+  - {fileID: 3808128335243008725, guid: 0344f7a5e8b1a6f438a907eaae6b2201, type: 3}
+  - {fileID: 1975051010419323938, guid: d9ebe5fdb390fad4e9c1b38a89abf10d, type: 3}

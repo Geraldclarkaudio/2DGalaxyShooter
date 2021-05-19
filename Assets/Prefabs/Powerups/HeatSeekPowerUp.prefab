@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 6039846222947532244}
   m_Layer: 0
   m_Name: HeatSeekPowerUp
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,5 +261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _playerTrans: {fileID: 0}
   powerupID: 5
   _powerupClip: {fileID: 8300000, guid: 902d8a67f0702414fb18d31615922f49, type: 3}

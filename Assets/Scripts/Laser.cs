@@ -33,8 +33,11 @@ public class Laser : MonoBehaviour
     }
     void MoveUp()
     {
+        
+
         if (_isEnemyLaser == false)
         {
+
             transform.Translate(Vector3.up * laserSpeed * Time.deltaTime);
 
             if (transform.position.y >= 8.0f)
@@ -46,6 +49,8 @@ public class Laser : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+
         
     }
     void MoveDown()

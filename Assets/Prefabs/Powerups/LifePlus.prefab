@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4828748730694129395}
   m_Layer: 0
   m_Name: LifePlus
-  m_TagString: Untagged
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,5 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _playerTrans: {fileID: 0}
   powerupID: 4
   _powerupClip: {fileID: 8300000, guid: 8ad6918fe4482184b95d58d5a2397ac3, type: 3}

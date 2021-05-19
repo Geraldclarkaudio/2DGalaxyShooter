@@ -466,6 +466,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8290560209499805978, guid: b15ebabde5c22fa44a8988f00b5eac2b,
     type: 3}
+  avoiderEnemy: {fileID: 5621575006814380315, guid: 20e151cff651834479a6fa8fb4ed0365,
+    type: 3}
+  shieldEnemy: {fileID: 8290560209499805978, guid: 6738baeedecdf984da59840e8fab2709,
+    type: 3}
   _behindEnemyPrefab: {fileID: 3808128335243008725, guid: 0344f7a5e8b1a6f438a907eaae6b2201,
     type: 3}
   _bossEnemyPrefab: {fileID: 1298866900794591664, guid: 620a50e6e97fba74daf90e5c832ea25c,
@@ -482,7 +486,14 @@ MonoBehaviour:
   - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
   - {fileID: 8073997846462604206, guid: a7ca6acbbb9efca45a2ac2f1cab0cce8, type: 3}
   - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
+  - {fileID: 6396425627860359806, guid: bcb918f35f33ec24ba47c1f7103e4a7e, type: 3}
   - {fileID: 8040909580450887359, guid: e9b8afc33b3d24a439e583fabed55ad9, type: 3}
+  enemy:
+  - {fileID: 8290560209499805978, guid: b15ebabde5c22fa44a8988f00b5eac2b, type: 3}
+  - {fileID: 1775534232551185079, guid: ff9d0a70b48914c41a342569399109c2, type: 3}
+  - {fileID: 3808128335243008725, guid: 0344f7a5e8b1a6f438a907eaae6b2201, type: 3}
+  - {fileID: 5621575006814380315, guid: 20e151cff651834479a6fa8fb4ed0365, type: 3}
+  - {fileID: 1975051010419323938, guid: d9ebe5fdb390fad4e9c1b38a89abf10d, type: 3}
   table: 28000000190000000f0000000a00000008000000
   stopSpawning: 0
   _wave: 3

@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField]
+   [SerializeField]
     private GameObject _enemyPrefab;
+
+    [SerializeField]
+    private GameObject avoiderEnemy;
+
+    [SerializeField]
+    private GameObject shieldEnemy;
 
     [SerializeField]
     private GameObject _behindEnemyPrefab;
@@ -27,16 +33,29 @@ public class SpawnManager : MonoBehaviour
     public int total;
     public int randomNumber;
 
+    //public int enemyTotal;
+   // public int enemyRandomNumber;
+
     public List<GameObject> powerup;
+    public List<GameObject> enemy;
 
     public int[] table = {
-        
+
         40, //ammo
         25, // heat seek
         15,//health
         10, // shield
         8 //triple 
     };
+
+   /* public int[] enemyTable =
+    {
+        50,//regular enemy
+        20,// follower enemy
+        10,//behind enemy
+        20,//avoider enemy
+        10,//laser beam enemy
+    };*/
 
     [SerializeField]
   
@@ -63,7 +82,8 @@ public class SpawnManager : MonoBehaviour
     public void StartSpawning()
     {
 
-        StartCoroutine(Wave1Spawn());
+       StartCoroutine(Wave1Spawn());
+       // StartCoroutine(SpawnEnemyRoutine());
        StartCoroutine(SpawnPowerUpRoutine());
     }
 
@@ -72,6 +92,32 @@ public class SpawnManager : MonoBehaviour
     {
         
     }
+
+   /* void ChooseEnemy()
+    {
+        enemyTotal = 0;
+
+        foreach (var item in enemyTable)
+        {
+            enemyTotal += item;
+        }
+
+        enemyRandomNumber = Random.Range(0, total);
+
+        for (int i = 0; i < enemyTable.Length; i++)
+        {
+            if (enemyRandomNumber <= enemyTable[i])
+            {
+                Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+                Instantiate(enemy[i], posToSpawn, Quaternion.identity);
+                return;
+            }
+            else
+            {
+                enemyRandomNumber -= enemyTable[i];
+            }
+        }
+    }*/
 
     void ChooseAPowerUp()
     {
@@ -99,16 +145,17 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator Wave1Spawn()
+   IEnumerator Wave1Spawn()
     {
         yield return new WaitForSeconds(1.0f);
 
-        while (_enemySpawned < 10 && stopSpawning == false)
+        while (_enemySpawned < 12 && stopSpawning == false)
         {
            if(_enemySpawned == 0)
             {
                 _uiManager.UpdateWave(_wave);
             }
+
             //spawn regular enemy
             Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
              GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
@@ -122,25 +169,27 @@ public class SpawnManager : MonoBehaviour
             GameObject followEnemy = Instantiate(_followerEnemyPrefab, posToSpawn2, Quaternion.identity);
             followEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
-            
 
             yield return new WaitForSeconds(2.5f);
 
+            //Spawn BehindFire Enemy
             Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
-            GameObject behindEnemy = Instantiate(_behindEnemyPrefab, posToSpawn3, Quaternion.Euler(0,0,90));
+            GameObject behindEnemy = Instantiate(_behindEnemyPrefab, posToSpawn3, Quaternion.Euler(0, 0, 90));
             behindEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3.0f);
         }
 
-        if (_enemySpawned == 10)
+        if (_enemySpawned == 12) // needs to be a multiple of the amount of prefabs or the coroutine stops and wont start the next.. 
         {
             _wave++;
             _uiManager.UpdateWave(_wave);
             _enemySpawned = 0;
             StopCoroutine(Wave1Spawn());
+           
             yield return new WaitForSeconds(5.0f);
+            
             StartCoroutine(Wave2Spawn());
         }
     }
@@ -163,16 +212,26 @@ public class SpawnManager : MonoBehaviour
             GameObject followEnemy = Instantiate(_followerEnemyPrefab, posToSpawn2, Quaternion.identity);
             followEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
-
-
             yield return new WaitForSeconds(2.5f);
 
             Vector3 posToSpawn3 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
             GameObject behindEnemy = Instantiate(_behindEnemyPrefab, posToSpawn3, Quaternion.Euler(0, 0, 90));
-            followEnemy.transform.parent = _enemyContainer.transform;
+            behindEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
+            yield return new WaitForSeconds(3.0f);
 
-            yield return new WaitForSeconds(3f);
+            Vector3 posToSpawn4 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject avoidEnemy = Instantiate(avoiderEnemy, posToSpawn4, Quaternion.identity);
+            avoidEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+            yield return new WaitForSeconds(2.5f);
+
+            Vector3 posToSpawn5 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject shield = Instantiate(shieldEnemy, posToSpawn5, Quaternion.identity);
+            shield.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+            yield return new WaitForSeconds(2.5f);
+
         }
 
         if (_enemySpawned == 20)
@@ -215,9 +274,26 @@ public class SpawnManager : MonoBehaviour
             GameObject laserEnemy = Instantiate(_laserEnemyPrefab, posToSpawn2, Quaternion.identity);
             laserEnemy.transform.parent = _enemyContainer.transform;
             _enemySpawned++;
-
-
             yield return new WaitForSeconds(Random.Range(4.0f, 5.0f));
+
+
+            Vector3 posToSpawn5 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject shield = Instantiate(shieldEnemy, posToSpawn5, Quaternion.identity);
+            shield.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+            yield return new WaitForSeconds(2.5f);
+
+            Vector3 posToSpawn4 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject behindEnemy = Instantiate(_behindEnemyPrefab, posToSpawn4, Quaternion.Euler(0, 0, 90));
+            behindEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+            yield return new WaitForSeconds(3.0f);
+
+            Vector3 posToSpawn6 = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            GameObject avoidEnemy = Instantiate(avoiderEnemy, posToSpawn6, Quaternion.identity);
+            avoidEnemy.transform.parent = _enemyContainer.transform;
+            _enemySpawned++;
+            yield return new WaitForSeconds(3.5f);
         }
 
         if (_enemySpawned >= 40)
@@ -257,6 +333,16 @@ public class SpawnManager : MonoBehaviour
 
         }
     }
+
+ /*   IEnumerator SpawnEnemyRoutine()
+    {
+        while(stopSpawning == false)
+        {
+            ChooseEnemy();
+
+            yield return new WaitForSeconds(Random.Range(2, 5));
+        }
+    }*/
 
 
     public void OnPlayerDeath()

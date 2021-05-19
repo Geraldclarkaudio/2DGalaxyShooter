@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
    public void UpdateLives(int currentlives)
     {
         //display img sprite
-        //give new oner based on current lives
+        //give new one based on current lives
         _livesImg.sprite = _livesSprites[currentlives];
 
         if(currentlives == 0)

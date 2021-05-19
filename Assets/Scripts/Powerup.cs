@@ -28,7 +28,7 @@ public class Powerup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
+       transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
         if (transform.position.y < -6.5f)
         {
@@ -68,14 +68,22 @@ public class Powerup : MonoBehaviour
                         break;
                     case 4:
                         player.HealthUp();
-                            break;
+                        break;
                     case 5:
                         player.HeatSeek();
+                        break;
+                    case 6:
+                        player.Damage();
                         break;
 
                 }
             } 
 
+            Destroy(this.gameObject);
+        }
+
+        if(other.tag == "EnemyLaser")
+        {
             Destroy(this.gameObject);
         }
     }

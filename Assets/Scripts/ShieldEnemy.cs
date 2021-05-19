@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class ShieldEnemy : MonoBehaviour
 {
     private Animator _anim;
     private SpawnManager spawnManager;
     private GameObject powerUp;
+
+    [SerializeField]
+    private GameObject enemyShield;
+
+    private bool isShieldActive = false;
 
     private RaycastHit2D hit;
 
@@ -31,6 +36,7 @@ public class Enemy : MonoBehaviour
     private AudioSource _enemyAudioSource;
     void Start()
     {
+        isShieldActive = true;
         powerUp = GameObject.FindGameObjectWithTag("Powerup");
         _player = GameObject.Find("Player").GetComponent<Player>();
         _enemyAudioSource = GetComponent<AudioSource>();
@@ -64,7 +70,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateMovement();
+       CalculateMovement();
         EnemyFire();
     }
 
@@ -114,7 +120,7 @@ public class Enemy : MonoBehaviour
     void CalculateMovement()
     {
 
-        transform.Translate(new Vector3(0,-1,0) * _enemySpeed * Time.deltaTime);
+        transform.Translate(new Vector3(0, -1, 0) * _enemySpeed * Time.deltaTime);
 
         if (transform.position.y < -4f)
         {
@@ -124,62 +130,87 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if(isShieldActive == true)
         {
+            Player player = other.transform.GetComponent<Player>();
 
-           Player player = other.transform.GetComponent<Player>();
+            enemyShield.SetActive(false);
+            isShieldActive = false;
 
-             if(player != null)
-             {
-                 player.Damage();
-             }
-
-            
-            _anim.SetTrigger("OnEnemyDeath");
-            _enemySpeed = 0;
-            _enemyAudioSource.Play();
-            Destroy(GetComponent<Collider2D>());
-            Destroy(GetComponent<Enemy>());
-            Destroy(this.gameObject, 2.5f);
-         }
-
-         if (other.tag == "Laser")
-         { 
-             Destroy(other.gameObject);
-            
-            if(_player != null)
+            if(other.tag == "Laser")
             {
-                _player.AddToScore(10);
+                Destroy(other.gameObject);
             }
-            
-            cameraAnimator.SetTrigger("CameraShake");
-            _anim.SetTrigger("OnEnemyDeath");
-            _enemySpeed = 0;
-            _enemyAudioSource.Play();
-
-            Destroy(GetComponent<Collider2D>());
-            Destroy(GetComponent<Enemy>());
-            Destroy(this.gameObject, 2.5f);
-         }  
-         
-         if(other.tag == "HeatSeeker")
+            if(other.tag == "Player")
+            {
+                player.Damage();
+            }
+        }
+        else
         {
-            Destroy(other.gameObject);
-
-            if (_player != null)
+            if (other.tag == "Player")
             {
-                _player.AddToScore(20);
+
+                Player player = other.transform.GetComponent<Player>();
+
+                if (player != null)
+                {
+                    player.Damage();
+                }
+                if(isShieldActive == true )
+                {
+                    player.Damage();
+                }
+
+
+                _anim.SetTrigger("OnEnemyDeath");
+                _enemySpeed = 0;
+                _enemyAudioSource.Play();
+                Destroy(GetComponent<Collider2D>());
+                Destroy(GetComponent<Enemy>());
+                Destroy(this.gameObject, 2.5f);
             }
-            cameraAnimator.SetTrigger("CameraShake");
-            _anim.SetTrigger("OnEnemyDeath");
-            _enemySpeed = 0;
-            _enemyAudioSource.Play();
 
-            Destroy(GetComponent<Collider2D>());
-            Destroy(GetComponent<Enemy>());
-            gameObject.tag = "Untagged";
-            Destroy(this.gameObject, 2.5f);
+            if (other.tag == "Laser")
+            {
+                Destroy(other.gameObject);
 
+                if (_player != null)
+                {
+                    _player.AddToScore(10);
+                }
+
+                cameraAnimator.SetTrigger("CameraShake");
+                _anim.SetTrigger("OnEnemyDeath");
+                _enemySpeed = 0;
+                _enemyAudioSource.Play();
+
+                Destroy(GetComponent<Collider2D>());
+                Destroy(GetComponent<Enemy>());
+                Destroy(this.gameObject, 2.5f);
+            }
+
+            if (other.tag == "HeatSeeker")
+            {
+                Destroy(other.gameObject);
+
+                if (_player != null)
+                {
+                    _player.AddToScore(20);
+                }
+                cameraAnimator.SetTrigger("CameraShake");
+                _anim.SetTrigger("OnEnemyDeath");
+                _enemySpeed = 0;
+                _enemyAudioSource.Play();
+
+                Destroy(GetComponent<Collider2D>());
+                Destroy(GetComponent<Enemy>());
+                gameObject.tag = "Untagged";
+                Destroy(this.gameObject, 2.5f);
+
+            }
         }
     }
+       
 }
+
