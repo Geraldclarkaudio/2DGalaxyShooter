@@ -10,10 +10,7 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private Transform _playerTrans;
 
-    //ID for Powerups
-    //0 = triple shot 
-    //1 = speed
-    //2 = shield
+    
     [SerializeField]
     private int powerupID;
 

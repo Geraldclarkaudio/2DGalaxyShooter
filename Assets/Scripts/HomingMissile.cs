@@ -9,17 +9,19 @@ public class HomingMissile : MonoBehaviour
     [SerializeField]
     private Transform target;
 
-    public GameObject[] targets;
+    //[SerializeField]
+    // private GameObject[] targets;
 
-      private void Start()
+    private void Start()
        {
-       // target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
-       }
+        target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
+
+       // targets = GameObject.FindGameObjectsWithTag("Enemy");
+    }
 
        private void Update()
        {
-        /*   if(target != null)
+          if(target != null)
            {
                transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
                LookAt2D(target.position);  
@@ -28,23 +30,18 @@ public class HomingMissile : MonoBehaviour
            else
            {
                return;
-           }*/
+           }
 
-        if(targets != null)
+       /* for (int i = 0; i < targets.Length; i++)
         {
 
-            for (int i = 0; i < targets.Length; i++)
+            if(targets.Length >= 0 && targets != null)
             {
-                if(targets[i] != null)
-                {
-                    transform.position = Vector2.MoveTowards(transform.position, targets[i].transform.position, speed * Time.deltaTime);
-                    LookAt2D(targets[i].transform.position);
-                }
-
+                i++;
+                transform.position = Vector2.MoveTowards(transform.position, targets[i].transform.position, speed * Time.deltaTime);
+                LookAt2D(targets[i].transform.position);
             }
-        }
-
-
+        }*/
        }
 
        public void LookAt2D(Vector3 lookTarget)

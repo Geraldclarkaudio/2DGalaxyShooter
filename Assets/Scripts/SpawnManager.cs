@@ -333,18 +333,6 @@ public class SpawnManager : MonoBehaviour
 
         }
     }
-
- /*   IEnumerator SpawnEnemyRoutine()
-    {
-        while(stopSpawning == false)
-        {
-            ChooseEnemy();
-
-            yield return new WaitForSeconds(Random.Range(2, 5));
-        }
-    }*/
-
-
     public void OnPlayerDeath()
     {
         stopSpawning = true;

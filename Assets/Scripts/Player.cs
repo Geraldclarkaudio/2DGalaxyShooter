@@ -223,7 +223,7 @@ public class Player : MonoBehaviour
             _audioSource.clip = _laserFireSound;
             Instantiate(tripleShotPrefab, transform.position, Quaternion.identity);
         }
-        if (isHeatSeekActive == true && GameObject.Find("Enemy(Clone)").GetComponent<Collider2D>() != null)
+        if (isHeatSeekActive == true)
         {
             _canFireHeatSeek = Time.time + heatSeekFireRate;
             Instantiate(heatSeekPowerUp, transform.position, Quaternion.identity);
