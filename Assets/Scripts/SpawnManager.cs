@@ -41,11 +41,13 @@ public class SpawnManager : MonoBehaviour
 
     public int[] table = {
 
-        40, //ammo
-        25, // heat seek
-        15,//health
-        10, // shield
-        8 //triple 
+        30, //ammo
+        20, // health down
+        15,// health up
+        10,// shield
+        10, // heat seek
+        10, // Speed
+        5, // triple shot 
     };
 
    /* public int[] enemyTable =

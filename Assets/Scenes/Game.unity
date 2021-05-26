@@ -483,10 +483,11 @@ MonoBehaviour:
   randomNumber: 0
   powerup:
   - {fileID: 686641914915422231, guid: b31078958b6288e4890b66621a5e2427, type: 3}
-  - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
+  - {fileID: 6396425627860359806, guid: bcb918f35f33ec24ba47c1f7103e4a7e, type: 3}
   - {fileID: 8073997846462604206, guid: a7ca6acbbb9efca45a2ac2f1cab0cce8, type: 3}
   - {fileID: 3614333478052915271, guid: 6f6ea2e1e2b432e4e8cb6b64ff2a8b48, type: 3}
-  - {fileID: 6396425627860359806, guid: bcb918f35f33ec24ba47c1f7103e4a7e, type: 3}
+  - {fileID: 6039846222947532246, guid: 37281f9c3deb99845be6fa09a4e775df, type: 3}
+  - {fileID: 8977601670858798797, guid: ba1057e1a96d73742a94a5024e9c9367, type: 3}
   - {fileID: 8040909580450887359, guid: e9b8afc33b3d24a439e583fabed55ad9, type: 3}
   enemy:
   - {fileID: 8290560209499805978, guid: b15ebabde5c22fa44a8988f00b5eac2b, type: 3}
@@ -494,7 +495,7 @@ MonoBehaviour:
   - {fileID: 3808128335243008725, guid: 0344f7a5e8b1a6f438a907eaae6b2201, type: 3}
   - {fileID: 5621575006814380315, guid: 20e151cff651834479a6fa8fb4ed0365, type: 3}
   - {fileID: 1975051010419323938, guid: d9ebe5fdb390fad4e9c1b38a89abf10d, type: 3}
-  table: 28000000190000000f0000000a00000008000000
+  table: 1e000000140000000f0000000a0000000a0000000a00000005000000
   stopSpawning: 0
   _wave: 3
   _enemySpawned: 0
@@ -872,7 +873,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &757938267 stripped
 GameObject:
@@ -980,7 +981,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &841781143
 GameObject:
@@ -1121,7 +1122,7 @@ MonoBehaviour:
   _laserFireSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _playerDamageSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _noAmmoSound: {fileID: 8300000, guid: 2a9c033f8d77ca94891dfbfa7f92b51e, type: 3}
-  _heatSeekSound: {fileID: 0}
+  _heatSeekSound: {fileID: 8300000, guid: 586b645332017b94cab452cdaf8d5623, type: 3}
 --- !u!212 &874856621
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1190,7 +1191,7 @@ Transform:
   - {fileID: 1591247185}
   - {fileID: 535182286}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &874856623
 BoxCollider2D:
@@ -1743,7 +1744,7 @@ Transform:
   m_LocalScale: {x: 1.0799594, y: 1.1421497, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1383945802
 GameObject:
@@ -3019,7 +3020,7 @@ PrefabInstance:
     - target: {fileID: 4225171082645706883, guid: 8f08608b1bd49784c8c1abc8abd1ccf2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4225171082645706883, guid: 8f08608b1bd49784c8c1abc8abd1ccf2,
         type: 3}

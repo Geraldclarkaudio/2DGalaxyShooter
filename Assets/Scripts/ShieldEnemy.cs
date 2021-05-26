@@ -145,6 +145,11 @@ public class ShieldEnemy : MonoBehaviour
             {
                 player.Damage();
             }
+
+            if(other.tag == "HeatSeeker")
+            {
+                Destroy(other.gameObject);
+            }
         }
         else
         {
@@ -196,7 +201,7 @@ public class ShieldEnemy : MonoBehaviour
 
                 if (_player != null)
                 {
-                    _player.AddToScore(20);
+                    _player.AddToScore(75);
                 }
                 cameraAnimator.SetTrigger("CameraShake");
                 _anim.SetTrigger("OnEnemyDeath");

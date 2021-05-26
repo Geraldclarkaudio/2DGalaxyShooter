@@ -280,3 +280,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3025285988050440925}
+  _ExplodeAnimPrefab: {fileID: 9156114463352819223, guid: ac81e2423f32fa34197d5d57bceb76e4,
+    type: 3}

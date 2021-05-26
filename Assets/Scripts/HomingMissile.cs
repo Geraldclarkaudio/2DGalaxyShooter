@@ -5,20 +5,17 @@ using UnityEngine;
 public class HomingMissile : MonoBehaviour
 {
     public float speed;
-
     [SerializeField]
     private Transform target;
 
-    //[SerializeField]
-    // private GameObject[] targets;
+   
 
     private void Start()
-       {
+    {
         target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
-
-       // targets = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        StartCoroutine(MissileActive());
     }
-
        private void Update()
        {
           if(target != null)
@@ -29,19 +26,11 @@ public class HomingMissile : MonoBehaviour
 
            else
            {
+            Destroy(this.gameObject);
                return;
            }
 
-       /* for (int i = 0; i < targets.Length; i++)
-        {
-
-            if(targets.Length >= 0 && targets != null)
-            {
-                i++;
-                transform.position = Vector2.MoveTowards(transform.position, targets[i].transform.position, speed * Time.deltaTime);
-                LookAt2D(targets[i].transform.position);
-            }
-        }*/
+          
        }
 
        public void LookAt2D(Vector3 lookTarget)
@@ -52,4 +41,12 @@ public class HomingMissile : MonoBehaviour
            transform.rotation = Quaternion.LookRotation(zDirection, yDirection);
        }
 
+    IEnumerator MissileActive()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(3f);
+            Destroy(this.gameObject);
+        }
+    }
 }

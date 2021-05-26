@@ -143,5 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fee39b8fe3d38d498a50e89da73fdba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ExplodeAnimPrefab: {fileID: 9156114463352819223, guid: ac81e2423f32fa34197d5d57bceb76e4,
+    type: 3}
+  ExplosionSound: {fileID: 0}
   _behindLaser: {fileID: 4240195074727651151, guid: d2b6acb09deff3546b4471e83025ec48,
     type: 3}

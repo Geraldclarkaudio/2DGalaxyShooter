@@ -8,6 +8,12 @@ public class BehindEnemyFire : MonoBehaviour
     private float _fireRate = 2f;
 
     [SerializeField]
+    private GameObject _ExplodeAnimPrefab;
+
+
+    private Animator cameraAnimator;
+
+    [SerializeField]
     private GameObject _behindLaser;
 
     private Transform _player;
@@ -18,7 +24,7 @@ public class BehindEnemyFire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        cameraAnimator = GameObject.Find("Main Camera").GetComponent<Animator>();
         _player = GameObject.Find("Player").GetComponent<Transform>();
     }
     // Update is called once per frame
@@ -61,12 +67,15 @@ public class BehindEnemyFire : MonoBehaviour
             {
                 _player.AddToScore(50);
             }
-           
-           
+
+            Instantiate(_ExplodeAnimPrefab, transform.position, Quaternion.identity);
+            cameraAnimator.SetTrigger("CameraShake");
+
+
             speed = 0;
             //make explode
             gameObject.tag = "Untagged";
-            Destroy(this.gameObject, 2.5f);
+            Destroy(this.gameObject);
 
         }
     }

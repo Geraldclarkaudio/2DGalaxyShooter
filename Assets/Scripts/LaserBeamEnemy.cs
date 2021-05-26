@@ -141,11 +141,6 @@ public class LaserBeamEnemy : MonoBehaviour
 
             StartCoroutine(Hurt());
 
-            if (_player != null)
-            {
-                _player.AddToScore(100);
-            }
-
             if(hitPoints == 2)
             {
                
@@ -160,6 +155,12 @@ public class LaserBeamEnemy : MonoBehaviour
 
             if(hitPoints < 1)
             {
+
+                if (_player != null)
+                {
+                    _player.AddToScore(100);
+                }
+
                 _enemySpeed = 0;
                 Instantiate(_ExplodeAnimPrefab, transform.position, Quaternion.identity);
                 Destroy(GetComponent<LaserBeamEnemy>());
@@ -167,14 +168,42 @@ public class LaserBeamEnemy : MonoBehaviour
             }
 
             
-        }
-        //if hitpoints = 2 instantiate the "hurt" animation for left if 1 instantiate right. if 0 explode destroy
-        //audio shit 
+        } 
 
         if(other.tag == "HeatSeeker")
         {
             hitPoints--;
-            //same seudo code 
+
+            Destroy(other.gameObject);
+
+            StartCoroutine(Hurt());
+
+
+            if (hitPoints == 2)
+            {
+
+                rightEngineSprite.SetActive(true);
+
+            }
+            if (hitPoints == 1)
+            {
+
+                leftEngineSprite.SetActive(true);
+            }
+
+            if (hitPoints < 1)
+            {
+
+                if (_player != null)
+                {
+                    _player.AddToScore(100);
+                }
+
+                _enemySpeed = 0;
+                Instantiate(_ExplodeAnimPrefab, transform.position, Quaternion.identity);
+                Destroy(GetComponent<LaserBeamEnemy>());
+                Destroy(this.gameObject);
+            }
 
         }
     }

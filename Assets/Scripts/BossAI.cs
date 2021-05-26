@@ -154,5 +154,16 @@ public class BossAI : MonoBehaviour
 
 
         }
+
+        if (other.tag == "HeatSeeker")
+        {
+            Destroy(other.gameObject);
+
+            _lives--;
+            StartCoroutine(Hurt());
+            cameraAnimator.SetTrigger("CameraShake");
+;
+
+        }
     }
 }

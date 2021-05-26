@@ -193,7 +193,7 @@ public class Player : MonoBehaviour
 
             if(thrustCurrent < 1f)
             {
-                thrustCurrent = thrustCurrent + 0.10f * Time.deltaTime;
+                thrustCurrent = thrustCurrent + 0; //+ 0.0f * Time.deltaTime;
             }
             Thrusta.SetActive(false);
 
@@ -206,6 +206,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
+
         _canFire = Time.time + _fireRate;
         _audioSource.clip = _laserFireSound;
         Instantiate(laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
@@ -226,6 +227,8 @@ public class Player : MonoBehaviour
         if (isHeatSeekActive == true)
         {
             _canFireHeatSeek = Time.time + heatSeekFireRate;
+            _audioSource.clip = _heatSeekSound;
+            _audioSource.Play(); 
             Instantiate(heatSeekPowerUp, transform.position, Quaternion.identity);
 
         }
@@ -303,7 +306,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SpeedBoostActive()
+   /* public void SpeedBoostActive()
     {
         isSpeedBoostActive = true;
         _speed *= _speedMultiplier;
@@ -318,13 +321,18 @@ public class Player : MonoBehaviour
             isSpeedBoostActive = false;
             _speed /= _speedMultiplier;
         }
-    } // powers down speed boost after 5 seconds
+    } // powers down speed boost after 5 seconds */
 
     public void ShieldActive()
     {
         isShieldActive = true;
         shieldLife = 3; 
         playerShieldPrefab.SetActive(true);
+    }
+
+    public void SpeedBoost()
+    {
+        thrustCurrent = thrustCurrent + 0.50f;
     }
 
 
@@ -348,8 +356,15 @@ public class Player : MonoBehaviour
    
     public void HealthUp()
     {
-        _lives++;
-        _uiManager.UpdateLives(_lives);
+        if(_lives < 3)
+        {
+            _lives++;
+            _uiManager.UpdateLives(_lives);
+        }
+        else
+        {
+            return;
+        }
 
         if(_lives == 3)
         {

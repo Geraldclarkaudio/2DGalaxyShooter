@@ -9,8 +9,6 @@ public class FollowerEnemy : MonoBehaviour
     [SerializeField]
     private GameObject explosionPrefab;
 
-    private AudioSource _enemyAudioSource;
-
     private Animator cameraAnimator;
 
     private Transform target;
@@ -23,18 +21,11 @@ public class FollowerEnemy : MonoBehaviour
         _player = GameObject.Find("Player").GetComponent<Player>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         target2 = GameObject.FindGameObjectWithTag("Target2").GetComponent<Transform>();
-
-        _enemyAudioSource = GetComponent<AudioSource>();
         cameraAnimator = GameObject.Find("Main Camera").GetComponent<Animator>();
 
         if (_player == null)
         {
             Debug.LogError("Player is Null");
-        }
-
-        if (_enemyAudioSource == null)
-        {
-            Debug.LogError("AudioSource On Enemy is Null");
         }
 
         if(cameraAnimator == null)
@@ -102,7 +93,6 @@ public class FollowerEnemy : MonoBehaviour
                 player.Damage();
             }
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            _enemyAudioSource.Play();
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject);
         }
@@ -119,7 +109,7 @@ public class FollowerEnemy : MonoBehaviour
             cameraAnimator.SetTrigger("CameraShake");
 
 
-            _enemyAudioSource.Play();
+           
             Destroy(GetComponent<Collider2D>());
             Destroy(this.gameObject);
         }
@@ -135,7 +125,6 @@ public class FollowerEnemy : MonoBehaviour
 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             cameraAnimator.SetTrigger("CameraShake");
-            _enemyAudioSource.Play();
             Destroy(GetComponent<Collider2D>());
             gameObject.tag = "Untagged";
             Destroy(this.gameObject);
