@@ -3,61 +3,7 @@ guid: 738e444192cab4649906b8a5057df946
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Body
-    second: {fileID: -9103484930961366303, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Default_Material
-    second: {fileID: -1134714066672644336, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Glass
-    second: {fileID: 8556262120643298411, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: GunsInnerLight
-    second: {fileID: -4526568522200676289, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: TailPipe_InnerLight
-    second: {fileID: 2678058231481734510, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tubes_GunCasing_TailPipe
-    second: {fileID: -5087124610726597805, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WingColor
-    second: {fileID: 1526852693174108791, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WingLightStrip
-    second: {fileID: 2956195867198201979, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 5561349426305759274, guid: 738e444192cab4649906b8a5057df946,
-      type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -95,11 +41,11 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
+    importCameras: 1
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

@@ -27,9 +27,8 @@ public class ScrollingBackground : MonoBehaviour
     {
         transform.Translate(Vector3.down * _speed);
 
-        if(transform.position.y <= -4.4f && hasSpawned == false)
+        if(transform.position.y <= -5.5f && hasSpawned == false)
         {
-            Debug.Log("Position should instantiate now");
             Instantiate(backgroundPrefab, originalPos, Quaternion.identity);
             hasSpawned = true;
         }
